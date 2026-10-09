@@ -588,12 +588,12 @@ body::after {
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    gap: 14px;
-    padding: 8px 12px 4px;
+    gap: 0;
+    padding: 0 6px;
     min-height: 240px;
 }
 
-/* Cartas em leque — com espaço fixo (não se juntam ao responder) */
+/* Cartas em leque (estilo Balatro) */
 .play-card {
     width: 155px;
     height: 210px;
@@ -607,27 +607,26 @@ body::after {
         0 5px 0 #1a1a1a,
         0 8px 18px rgba(0,0,0,0.35),
         inset 0 0 0 2px #e8e0d0;
-    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s, opacity 0.3s;
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s, opacity 0.3s, filter 0.2s;
     color: #1a1a1a;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
     flex-shrink: 0;
-    margin: 0;
+    margin: 0 -12px;
     -webkit-tap-highlight-color: transparent;
     touch-action: manipulation;
     user-select: none;
 }
 
-/* Leque suave (só rotação leve) */
-.play-card:nth-child(1) { transform: rotate(-3deg); z-index: 1; }
-.play-card:nth-child(2) { transform: rotate(-1deg); z-index: 2; }
-.play-card:nth-child(3) { transform: rotate(1deg); z-index: 3; }
-.play-card:nth-child(4) { transform: rotate(3deg); z-index: 4; }
+.play-card:nth-child(1) { transform: rotate(-5deg) translateY(6px); z-index: 1; }
+.play-card:nth-child(2) { transform: rotate(-1.5deg) translateY(2px); z-index: 2; }
+.play-card:nth-child(3) { transform: rotate(1.5deg) translateY(2px); z-index: 3; }
+.play-card:nth-child(4) { transform: rotate(5deg) translateY(6px); z-index: 4; }
 
 .play-card:hover:not(:disabled) {
-    transform: translateY(-18px) scale(1.04) rotate(0deg) !important;
+    transform: translateY(-22px) scale(1.06) rotate(0deg) !important;
     box-shadow:
         0 12px 0 #1a1a1a,
         0 18px 32px rgba(0,0,0,0.5),
@@ -635,16 +634,17 @@ body::after {
     z-index: 20 !important;
 }
 .play-card:active:not(:disabled) {
-    transform: translateY(-8px) scale(1.02) rotate(0deg) !important;
+    transform: translateY(-10px) scale(1.03) rotate(0deg) !important;
 }
 
 .play-card:disabled { cursor: default; }
 
-/* Escurece, mas MANTÉM o espaço da carta (não junta) */
+/* Após resposta: só apaga, NÃO mexe na posição do leque */
 .play-card.dimmed {
-    opacity: 0.4;
-    filter: grayscale(0.35);
-    /* não zera o transform — evita cartas coladas */
+    opacity: 0.38;
+    filter: grayscale(0.45) brightness(0.92);
+    pointer-events: none;
+    /* importante: não usar transform: none — senão as cartas "colam" */
 }
 
 .play-card .card-corner {
@@ -672,50 +672,45 @@ body::after {
     padding: 0 6px;
 }
 
+/* Certa: sobe um pouco, mesma largura, sem scale grande */
 .play-card.correct {
     background: linear-gradient(160deg, #d1fae5, #a7f3d0) !important;
     border-color: #059669 !important;
-    box-shadow: 0 4px 0 #047857, 0 0 24px rgba(16,185,129,0.5) !important;
+    box-shadow: 0 6px 0 #047857, 0 0 22px rgba(16,185,129,0.45) !important;
     opacity: 1 !important;
     filter: none !important;
-    transform: translateY(-14px) scale(1.04) rotate(0deg) !important;
+    transform: translateY(-18px) rotate(0deg) !important;
     z-index: 15 !important;
+    margin-left: -12px !important;
+    margin-right: -12px !important;
 }
 
+/* Errada: fica no leque, só muda cor */
 .play-card.wrong {
     background: linear-gradient(160deg, #fee2e2, #fecaca) !important;
     border-color: #dc2626 !important;
-    box-shadow: 0 4px 0 #991b1b, 0 0 16px rgba(239,68,68,0.4) !important;
+    box-shadow: 0 4px 0 #991b1b, 0 0 14px rgba(239,68,68,0.35) !important;
     opacity: 1 !important;
     filter: none !important;
-    transform: translateY(-6px) rotate(0deg) !important;
-    z-index: 14 !important;
+    /* mantém a rotação do nth-child — não força rotate(0) agressivo */
+    z-index: 12 !important;
 }
 
-/* Depois de responder: cartas alinhadas e separadas */
+/* answered: não espalha; só garante que dimmed não zere transform */
 .hand-cards.answered {
-    gap: 16px !important;
-    align-items: flex-end;
-}
-.hand-cards.answered .play-card {
-    margin: 0 !important;
-    transform: none !important;
-    flex-shrink: 0;
+    gap: 0;
 }
 .hand-cards.answered .play-card.dimmed {
-    opacity: 0.4;
-    filter: grayscale(0.4);
-    transform: none !important;
+    /* herda nth-child transform */
+    opacity: 0.38;
 }
 .hand-cards.answered .play-card.correct {
-    transform: translateY(-12px) !important;
+    transform: translateY(-18px) rotate(0deg) !important;
     z-index: 15 !important;
 }
 .hand-cards.answered .play-card.wrong {
-    transform: translateY(-4px) !important;
-    z-index: 14 !important;
+    z-index: 12 !important;
 }
-
 
 .suit-red { color: #c41e3a; }
 .suit-black { color: #1a1a1a; }
@@ -930,8 +925,8 @@ body::after {
         transform: translateY(-6px) scale(1.03) !important;
     }
     .play-card.dimmed {
-        transform: none !important;
-        margin: 0 !important;
+        /* mantém posição no leque */
+        opacity: 0.38;
     }
     .play-card .card-text { font-size: 0.68rem; line-height: 1.25; padding: 0 4px; }
     .play-card .card-icon { font-size: 1.5rem; margin: 22px 0 8px; }
