@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Bancada - Manutenção & Suporte de TI</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --accent-blue: #38bdf8;
+            --accent-green: #22c55e;
+            --accent-red: #ef4444;
+            --accent-warning: #f59e0b;
+            --mobo-bg: #064e3b;
+            --mobo-border: #022c22;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #090d16 0%, #0f172a 50%, #172554 100%);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px 10px;
+        }
+
+        .workbench-container {
+            width: 100%;
+            max-width: 950px;
+            background-color: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+        }
+
+        .workbench-header {
+            background-color: #0b1329;
+            padding: 20px 30px;
+            border-bottom: 3px solid var(--accent-blue);
+        }
+
+        .bench-mat {
+            background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+            border: 2px solid #334155;
+            border-radius: 16px;
+            padding: 20px;
+            position: relative;
+        }
+
+        /* Hardware Component Styles */
+        .hardware-part {
+            background-color: #334155;
+            border: 2px solid #475569;
+            border-radius: 12px;
+            padding: 14px;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            user-select: none;
+        }
+
+        .hardware-part:hover {
+            border-color: var(--accent-blue);
+            background-color: #3b82f622;
+            transform: translateY(-3px);
+        }
+
+        .hardware-part.selected {
+            border-color: var(--accent-blue);
+            background-color: #3b82f644;
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+        }
+
+        /* Motherboard Simulator */
+        .motherboard {
+            background-color: var(--mobo-bg);
+            border: 4px solid var(--mobo-border);
+            border-radius: 14px;
+            padding: 20px;
+            position: relative;
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.6);
+        }
+
+        .mobo-slot {
+            background-color: rgba(0, 0, 0, 0.4);
+            border: 2px dashed #34d399;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            color: #a7f3d0;
+        }
+
+        .mobo-slot:hover {
+            background-color: rgba(52, 211, 153, 0.2);
+            border-color: #ffffff;
+            color: #fff;
+        }
+
+        .mobo-slot.installed {
+            background-color: #047857 !important;
+            border-style: solid;
+            border-color: var(--accent-green);
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        /* CRT / Monitor Screen */
+        .monitor-screen {
+            background-color: #050811;
+            border: 12px solid #334155;
+            border-radius: 12px;
+            padding: 20px;
+            font-family: 'JetBrains Mono', monospace;
+            color: #38edf8;
+            box-shadow: inset 0 0 15px rgba(0, 212, 255, 0.2);
+            min-height: 220px;
+        }
+
+        .terminal-input {
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid var(--accent-blue);
+            color: #38edf8;
+            font-family: 'JetBrains Mono', monospace;
+            outline: none;
+            width: 100%;
+            padding: 5px 0;
+            font-size: 1rem;
+        }
+
+        .action-card {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 15px;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .action-card:hover {
+            border-color: var(--accent-blue);
+            background: #334155;
+            transform: translateY(-2px);
+        }
+
+        .action-card.correct-action {
+            border-color: var(--accent-green) !important;
+            background: #064e3b !important;
+        }
+
+        .action-card.wrong-action {
+            border-color: var(--accent-red) !important;
+            background: #7f1d1d !important;
+        }
+
+        .feedback-box {
+            border-radius: 12px;
+            padding: 16px 20px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .btn-tech {
+            background: linear-gradient(135deg, #0284c7 0%, #2563eb 100%);
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .btn-tech:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.6);
+            color: white;
+        }
+
+        .screen-view {
+            display: none;
+            padding: 30px;
+        }
+
+        .screen-view.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="workbench-container">
+        <!-- Workbench Header -->
+        <div class="workbench-header d-flex justify-content-between align-items-center">
+            <div>
+                <h3 class="fw-bold mb-0"><i class="fa-solid fa-microchip text-info me-2"></i>Lab & Bancada de TI</h3>
+                <small class="text-slate-400 text-muted">Simulador Prático de Manutenção & Suporte Técnico</small>
+            </div>
+            <div id="header-status" class="d-none">
+                <span class="badge bg-dark border border-info text-info px-3 py-2 rounded-pill fs-6" id="stage-counter">Etapa 1 de 10</span>
+            </div>
+        </div>
+
+        <!-- 1. TELA INICIAL -->
+        <div id="screen-start" class="screen-view active text-center">
+            <div class="my-4">
+                <i class="fa-solid fa-screwdriver-wrench text-info display-1"></i>
+            </div>
+            <h2 class="fw-bold mb-3">Bem-vindo à Bancada de Testes!</h2>
+            <p class="text-muted mx-auto style-description" style="max-width: 650px;">
+                Você assumirá o papel de Técnico de TI em um laboratório especializado. Enfrente <strong>10 casos reais de bancada</strong> sem pressa: monte hardware, examine diagnósticos em vídeo/BIOS, limpe contatos físicos e execute comandos de reparo no Terminal.
+            </p>
+
+            <div class="row g-3 justify-content-center my-4 text-start">
+                <div class="col-md-4">
+                    <div class="p-3 border border-secondary rounded-3 bg-dark">
+                        <i class="fa-solid fa-hourglass-disabled text-warning fs-4 mb-2"></i>
+                        <h6 class="fw-bold">Sem Temporizador</h6>
+                        <small class="text-muted">Analise com cuidado e trabalhe no seu ritmo sem contagem regressiva.</small>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="p-3 border border-secondary rounded-3 bg-dark">
+                        <i class="fa-solid fa-hands-holding-circle text-info fs-4 mb-2"></i>
+                        <h6 class="fw-bold">Montagem Prática</h6>
+                        <small class="text-muted">Instale peças no soquete correto e faça manutenção física na placa.</small>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="p-3 border border-secondary rounded-3 bg-dark">
+                        <i class="fa-solid fa-terminal text-success fs-4 mb-2"></i>
+                        <h6 class="fw-bold">Prompt & Terminal</h6>
+                        <small class="text-muted">Execute comandos reais de diagnóstico do sistema operacional.</small>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn btn-tech btn-lg mt-2" onclick="startSimulation()">
+                <i class="fa-solid fa-power-off me-2"></i>Ligar Bancada & Iniciar
+            </button>
+        </div>
+
+        <!-- 2. TELA DO SIMULADOR (BANCADA) -->
+        <div id="screen-lab" class="screen-view">
+            <!-- Barra de Progresso -->
+            <div class="progress mb-4 bg-dark border border-secondary" style="height: 10px;">
+                <div id="progress-bar" class="progress-bar progress-bar-striped progress-bar-animated bg-info" style="width: 10%;"></div>
+            </div>
+
+            <!-- Título e Instrução da Etapa -->
+            <div class="mb-4">
+                <span id="category-badge" class="badge bg-primary mb-2 px-3 py-2">Categoria</span>
+                <h4 id="stage-title" class="fw-bold text-white mb-2">Título do Desafio</h4>
+                <p id="stage-description" class="text-slate-300 mb-0">Descrição do problema trazido pelo cliente ou estado atual do equipamento.</p>
+            </div>
+
+            <!-- ÁREA DE TRABALHO DA BANCADA (Dinâmica) -->
+            <div id="workbench-workspace" class="bench-mat mb-4">
+                <!-- Conteúdo gerado via JS dependendo do tipo da etapa -->
+            </div>
+
+            <!-- PAINEL DE FEEDBACK TÉCNICO -->
+            <div id="feedback-panel" class="feedback-box d-none mb-4">
+                <h5 class="fw-bold mb-2" id="feedback-title"><i class="fa-solid fa-circle-info me-2"></i>Análise Técnica</h5>
+                <p class="mb-0" id="feedback-text">Explicação detalhada do procedimento.</p>
+            </div>
+
+            <!-- CONTROLES -->
+            <div class="d-flex justify-content-end">
+                <button id="btn-next-stage" class="btn btn-tech d-none" onclick="nextStage()">
+                    Próximo Caso <i class="fa-solid fa-arrow-right ms-2"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- 3. TELA DE RELATÓRIO FINAL -->
+        <div id="screen-report" class="screen-view text-center">
+            <div class="my-3">
+                <i id="report-icon" class="fa-solid fa-award text-warning display-1"></i>
+            </div>
+            <h2 class="fw-bold mb-1">Relatório de Performance do Técnico</h2>
+            <p class="text-muted">AVALIAÇÃO DE BANCADA E DIAGNÓSTICO DE TI</p>
+
+            <div class="row g-3 justify-content-center my-4">
+                <div class="col-md-4">
+                    <div class="p-3 border border-secondary bg-dark rounded-3">
+                        <small class="text-muted d-block">Procedimentos Corretos</small>
+                        <span class="fs-2 fw-bold text-success" id="report-score">0/10</span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="p-3 border border-secondary bg-dark rounded-3">
+                        <small class="text-muted d-block">Eficiência do Laboratório</small>
+                        <span class="fs-2 fw-bold text-info" id="report-percent">0%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="report-badge-box" class="alert alert-info border-0 mb-4">
+                <!-- Rank do técnico -->
+            </div>
+
+            <div class="text-start mb-4">
+                <h5 class="fw-bold text-white mb-3"><i class="fa-solid fa-list-check me-2"></i>Histórico das Intervenções:</h5>
+                <div id="report-summary-list" style="max-height: 280px; overflow-y: auto;">
+                    <!-- Lista detalhada -->
+                </div>
+            </div>
+
+            <button class="btn btn-tech btn-lg" onclick="restartSimulation()">
+                <i class="fa-solid fa-rotate-right me-2"></i>Reiniciar Bancada
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // BANCO DE DADOS DE 10 ETAPAS PRÁTICAS DE BANCADA
+        const labStages = [
+            {
+                category: "🛠️ Montagem de Hardware",
+                title: "Instalação de Memória RAM Dual-Channel",
+                description: "O cliente enviou um pente adicional de Memória RAM DDR4 para upgrade. Selecione a memória na bancada e instale-a no slot correto da placa-mãe para atuar com o módulo já existente.",
+                type: "assembly",
+                piece: { id: "RAM_DDR4", name: "Pente de Memória RAM DDR4 8GB", icon: "fa-solid fa-memory" },
+                slots: [
+                    { id: "PCI", name: "Slot PCI-Express x16", correct: false, reason: "Incorreto! O slot PCI-Express destina-se a placas de expansão/vídeo." },
+                    { id: "DIMM_2", name: "Slot DIMM 2 (Memória RAM)", correct: true, reason: "Excelente! A memória foi encaixada no Slot DIMM correto, travando os encaixes laterais e ativando o Dual-Channel." },
+                    { id: "SOCKET", name: "Soquete de CPU LGA", correct: false, reason: "Incorreto! O soquete LGA é exclusivo para o Processador." }
+                ],
+                explanation: "Módulos de memória RAM devem ser instalados nos soquetes DIMM da placa-mãe. Ao instalar múltiplos pentes, atentar-se aos slots de mesma cor ou especificação manual garante a tecnologia Dual-Channel."
+            },
+            {
+                category: "🔍 Diagnóstico de POST e Vídeo",
+                title: "Computador Liga, Coolers Giram, mas Não Dá Vídeo",
+                description: "O computador liga os LEDs da placa, os coolers giram em velocidade máxima, porém não há sinal de vídeo na tela. Ao analisar os LEDs de diagnóstico (Debug LED) da placa-mãe, o LED 'DRAM' está aceso em vermelho.",
+                type: "action-cards",
+                actions: [
+                    { label: "Trocar a Fonte de Alimentação por uma nova", correct: false, text: "A fonte está fornecendo energia normalmente, pois os coolers e LEDs acenderam." },
+                    { label: "Remover a Memória RAM, limpar os contatos com limpa-contato/borracha e reencaixar", correct: true, text: "Perfeito! Mau contato nos pinos da RAM por oxidação/poeira é a causa número 1 de falhas do POST com sinal do LED DRAM." },
+                    { label: "Reinstalar o sistema operacional no SSD", correct: false, text: "Incorreto. O computador nem sequer passou pelo POST, portanto o SSD não começou a ser lido." }
+                ],
+                explanation: "Quando o Debug LED de DRAM fica aceso, indica que a BIOS/UEFI não conseguiu inicializar a memória. A primeira ação técnica recomendada é a limpeza dos contatos dourados com borracha isenta de resíduos ou limpa-contato elétrico."
+            },
+            {
+                category: "💻 Terminal e Prompt de Comando",
+                title: "Diagnóstico de Interface de Rede Local",
+                description: "O computador perdeu a conexão de rede local. O cabo RJ45 está conectado, mas a placa mostra status nulo. No Terminal, execute o comando correto para testar a resposta interna da placa de rede (Loopback TCP/IP).",
+                type: "terminal",
+                expectedCommand: "ping 127.0.0.1",
+                hint: "Dica: Use o comando 'ping' seguido do endereço IP universal de Loopback Local.",
+                explanation: "O comando 'ping 127.0.0.1' envia pacotes para a própria interface local (Loopback). Se houver resposta de tempo, valida-se que a placa de rede física e os drivers da pilha TCP/IP do sistema operacional estão funcionando."
+            },
+            {
+                category: "🛠️ Montagem de Hardware",
+                title: "Aplicação de Pasta Térmica e Refrigeração",
+                description: "Após a troca da CPU, o processador precisa de refrigeração. Selecione o item correto da bancada e aplique no local correto antes de fixar o dissipador.",
+                type: "assembly",
+                piece: { id: "THERMAL_PASTE", name: "Seringa de Pasta Térmica", icon: "fa-solid fa-flask" },
+                slots: [
+                    { id: "CPU_SURFACE", name: "Superfície Metálica (IHS) do Processador", correct: true, reason: "Perfeito! A pasta térmica preencheu as imperfeições entre a CPU e o dissipador de calor." },
+                    { id: "FAN_BLADES", name: "Hélices da Ventoinha do Cooler", correct: false, reason: "Incorreto! Aplicar pasta térmica nas hélices estragará o motor da ventoinha." },
+                    { id: "NVME_SLOT", name: "Slot M.2 NVMe", correct: false, reason: "Incorreto! O slot M.2 é para armazenamento SSD." }
+                ],
+                explanation: "A pasta térmica deve ser aplicada na superfície metálica externa do processador (IHS). Ela preenche lacunas de ar microscópicas, permitindo a condução eficiente do calor para o cooler."
+            },
+            {
+                category: "🔧 Manutenção Física de Bancada",
+                title: "Computador Desliga após 10 Minutos de Uso",
+                description: "Examine o monitor de telemetria da bancada conectado ao computador do cliente. Identifique a anomalia e selecione o procedimento físico adequado.",
+                type: "telemetry",
+                telemetryData: {
+                    cpuTemp: "94°C (CRÍTICO)",
+                    gpuTemp: "42°C (NORMAL)",
+                    fanSpeed: "0 RPM (PARADO/TRAVADO)",
+                    v12: "12.08V (OK)"
+                },
+                actions: [
+                    { label: "Substituir o Cooler da CPU por falha de rotação", correct: true, text: "Excelente! Com 0 RPM no cooler, o processador atinge 94°C e entra em desligamento térmico de proteção (Thermal Shutdown)." },
+                    { label: "Trocar o cabo de vídeo HDMI", correct: false, text: "Incorreto. O cabo de vídeo não tem relação com o desligamento térmico do computador." },
+                    { label: "Formatar o disco rígido", correct: false, text: "Incorreto. A causa é física e mecânica (trava/queima do cooler da CPU)." }
+                ],
+                explanation: "Temperaturas acima de 90°C combinadas com rotação nula do cooler indicam que o sistema de arrefecimento falhou. A CPU desliga automaticamente para não sofrer danos permanentes no silício."
+            },
+            {
+                category: "💻 Terminal e Prompt de Comando",
+                title: "Reparo de Arquivos de Sistema Corrompidos",
+                description: "O sistema operacional apresenta erros de tela azul aleatórios e travamentos. No Prompt de Comando como Administrador, execute a ferramenta nativa de verificação e reparo de integridade dos arquivos do Windows.",
+                type: "terminal",
+                expectedCommand: "sfc /scannow",
+                hint: "Dica: Utilize o comando System File Checker no modo de escaneamento imediato.",
+                explanation: "O comando 'sfc /scannow' verifica todos os arquivos protegidos do sistema operacional e substitui arquivos danificados ou corrompidos por uma cópia em cache."
+            },
+            {
+                category: "🛠️ Montagem de Hardware",
+                title: "Upgrade de Armazenamento Ultra Rápido",
+                description: "O cliente deseja instalar um novo SSD de alta velocidade para o sistema operacional. Selecione a unidade correta e instale no slot correspondente da placa-mãe.",
+                type: "assembly",
+                piece: { id: "SSD_NVME", name: "SSD M.2 NVMe PCIe 4.0", icon: "fa-solid fa-hard-drive" },
+                slots: [
+                    { id: "SATA_PORT", name: "Porta SATA III 6Gb/s", correct: false, reason: "Incorreto! Placas SATA aceitam apenas cabos de SSDs de 2.5 polegadas." },
+                    { id: "M2_SLOT", name: "Slot M.2 NVMe (PCIe Key-M)", correct: true, reason: "Correto! O SSD NVMe foi parafusado com sucesso no slot M.2 com barramento PCIe direto." },
+                    { id: "ATX_24P", name: "Conector ATX 24 Pinos", correct: false, reason: "Incorreto! Este conector é para alimentação elétrica vinda da fonte." }
+                ],
+                explanation: "SSDs M.2 NVMe utilizam soquetes com chave Key-M dedicados e conectados diretamente às linhas PCIe do processador/chipset, garantindo elevadas taxas de transferência."
+            },
+            {
+                category: "🔧 Manutenção Física de Bancada",
+                title: "Perda da Data, Hora e Configurações de BIOS",
+                description: "Toda vez que o computador do cliente é tirado da tomada, o relógio reseta para o ano de 2015 e a ordem de boot do sistema é perdida. Qual o componente com defeito na placa-mãe?",
+                type: "action-cards",
+                actions: [
+                    { label: "Substituir a Bateria CR2032 (CMOS 3V) da placa-mãe", correct: true, text: "Perfeito! A bateria CR2032 descarregada impede que a memória CMOS guarde o relógio de tempo real (RTC) e os parâmetros da BIOS." },
+                    { label: "Trocar o pente de Memória RAM", correct: false, text: "Incorreto. A RAM é uma memória volátil para execução do SO, não mantendo o relógio da BIOS." },
+                    { label: "Trocar a pasta térmica da CPU", correct: false, text: "Incorreto. A pasta térmica cuida apenas do calor da CPU." }
+                ],
+                explanation: "A bateria do tipo moeda CR2032 alimenta o circuito de tempo real (RTC) e o chip CMOS da placa-mãe quando a energia principal da tomada é interrompida."
+            },
+            {
+                category: "🛠️ Montagem de Hardware",
+                title: "Instalação da Placa de Vídeo Dedicada",
+                description: "Instale a nova Placa de Vídeo (GPU) na placa-mãe da bancada para permitir renderização gráfica avançada.",
+                type: "assembly",
+                piece: { id: "GPU_CARD", name: "Placa de Vídeo (GPU) PCIe x16", icon: "fa-solid fa-display" },
+                slots: [
+                    { id: "PCI_X16", name: "Slot PCI-Express 4.0 x16 (Principal)", correct: true, reason: "Excelente! A GPU foi travada no slot x16 de maior largura de banda da placa-mãe." },
+                    { id: "DIMM_1", name: "Slot DIMM de Memória", correct: false, reason: "Incorreto! Slots DIMM são para memória RAM." },
+                    { id: "CPU_SOCKET", name: "Soquete da CPU", correct: false, reason: "Incorreto! Soquete para o processador." }
+                ],
+                explanation: "Placas de vídeo dedicadas requerem a largura de banda completa oferecida pelo slot PCI-Express x16 primário da placa-mãe."
+            },
+            {
+                category: "💻 Terminal e Prompt de Comando",
+                title: "Verificação de Setores Defeituosos no Disco",
+                description: "O sistema apresenta extrema lentidão para abrir arquivos no disco rígido secundário. Execute a ferramenta de checagem do sistema de arquivos e integridade de disco no Prompt.",
+                type: "terminal",
+                expectedCommand: "chkdsk",
+                hint: "Dica: Digite o nome do utilitário 'Check Disk' em formato abreviado de comando.",
+                explanation: "O comando 'chkdsk' examina a integridade da estrutura do sistema de arquivos, identifica setores defeituosos (bad blocks) e recupera dados legíveis."
+            }
+        ];
+
+        // VARIÁVEIS DE ESTADO
+        let currentStageIndex = 0;
+        let score = 0;
+        let userHistory = [];
+        let selectedAssemblyPart = null;
+
+        // ELEMENTOS DOM
+        const screenStart = document.getElementById('screen-start');
+        const screenLab = document.getElementById('screen-lab');
+        const screenReport = document.getElementById('screen-report');
+        const headerStatus = document.getElementById('header-status');
+        const stageCounter = document.getElementById('stage-counter');
+        const progressBar = document.getElementById('progress-bar');
+
+        const categoryBadge = document.getElementById('category-badge');
+        const stageTitle = document.getElementById('stage-title');
+        const stageDescription = document.getElementById('stage-description');
+        const workbenchWorkspace = document.getElementById('workbench-workspace');
+
+        const feedbackPanel = document.getElementById('feedback-panel');
+        const feedbackTitle = document.getElementById('feedback-title');
+        const feedbackText = document.getElementById('feedback-text');
+        const btnNextStage = document.getElementById('btn-next-stage');
+
+        function startSimulation() {
+            screenStart.classList.remove('active');
+            screenReport.classList.remove('active');
+            screenLab.classList.add('active');
+            headerStatus.classList.remove('d-none');
+
+            currentStageIndex = 0;
+            score = 0;
+            userHistory = [];
+
+            loadStage();
+        }
+
+        function loadStage() {
+            resetStageState();
+
+            const stage = labStages[currentStageIndex];
+            
+            // Atualizar contadores
+            stageCounter.textContent = `Etapa ${currentStageIndex + 1} de ${labStages.length}`;
+            const progress = ((currentStageIndex + 1) / labStages.length) * 100;
+            progressBar.style.width = `${progress}%`;
+
+            categoryBadge.textContent = stage.category;
+            stageTitle.textContent = stage.title;
+            stageDescription.textContent = stage.description;
+
+            // Renderização baseada no tipo de etapa
+            if (stage.type === 'assembly') {
+                renderAssemblyStage(stage);
+            } else if (stage.type === 'action-cards') {
+                renderActionCardsStage(stage);
+            } else if (stage.type === 'terminal') {
+                renderTerminalStage(stage);
+            } else if (stage.type === 'telemetry') {
+                renderTelemetryStage(stage);
+            }
+        }
+
+        function resetStageState() {
+            selectedAssemblyPart = null;
+            feedbackPanel.className = 'feedback-box d-none mb-4';
+            btnNextStage.classList.add('d-none');
+            workbenchWorkspace.innerHTML = '';
+        }
+
+        // 1. RENDERIZADOR DE ETAPA DE MONTAGEM
+        function renderAssemblyStage(stage) {
+            workbenchWorkspace.innerHTML = `
+                <div class="row g-4 align-items-center">
+                    <div class="col-md-5">
+                        <h6 class="fw-bold text-info mb-3"><i class="fa-solid fa-box-open me-2"></i>Peças Disponíveis na Bancada:</h6>
+                        <div class="hardware-part d-flex align-items-center gap-3" id="part-item" onclick="selectAssemblyPart()">
+                            <i class="${stage.piece.icon} text-info fs-2"></i>
+                            <div>
+                                <h6 class="mb-0 fw-bold">${stage.piece.name}</h6>
+                                <small class="text-muted">Clique para selecionar a peça</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="motherboard">
+                            <h6 class="fw-bold text-center text-emerald-300 mb-3"><i class="fa-solid fa-microchip me-2"></i>Placa-Mãe (Slots & Soquetes)</h6>
+                            <div class="d-grid gap-3">
+                                ${stage.slots.map(s => `
+                                    <div class="mobo-slot" id="slot-${s.id}" onclick="installPartInSlot('${s.id}')">
+                                        <i class="fa-solid fa-arrow-right-to-bracket me-2"></i> ${s.name}
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function selectAssemblyPart() {
+            selectedAssemblyPart = true;
+            const partEl = document.getElementById('part-item');
+            partEl.classList.add('selected');
+        }
+
+        function installPartInSlot(slotId) {
+            if (!selectedAssemblyPart) {
+                alert("Por favor, selecione a peça na bancada primeiro clicando sobre ela!");
+                return;
+            }
+
+            const stage = labStages[currentStageIndex];
+            const chosenSlot = stage.slots.find(s => s.id === slotId);
+            const slotEl = document.getElementById(`slot-${slotId}`);
+
+            const isCorrect = chosenSlot.correct;
+
+            if (isCorrect) {
+                slotEl.classList.add('installed');
+                slotEl.innerHTML = `<i class="fa-solid fa-check-circle me-2"></i> ${stage.piece.name} Instalado com Sucesso!`;
+            } else {
+                slotEl.style.borderColor = "var(--accent-red)";
+                slotEl.style.backgroundColor = "rgba(239, 68, 68, 0.2)";
+            }
+
+            // Desabilitar mais cliques nos slots
+            document.querySelectorAll('.mobo-slot').forEach(el => el.onclick = null);
+
+            processStageResult(isCorrect, chosenSlot.reason, stage.explanation);
+        }
+
+        // 2. RENDERIZADOR DE CARDS DE AÇÃO
+        function renderActionCardsStage(stage) {
+            workbenchWorkspace.innerHTML = `
+                <h6 class="fw-bold text-info mb-3"><i class="fa-solid fa-screwdriver me-2"></i>Selecione o Procedimento de Bancada Correto:</h6>
+                <div class="d-grid gap-3">
+                    ${stage.actions.map((act, idx) => `
+                        <div class="action-card d-flex align-items-center justify-content-between" onclick="chooseActionCard(${idx})">
+                            <span class="fw-semibold"><i class="fa-solid fa-gears me-2 text-info"></i>${act.label}</span>
+                            <i class="fa-regular fa-circle fs-5 text-muted"></i>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        function chooseActionCard(actionIndex) {
+            const stage = labStages[currentStageIndex];
+            const chosenAction = stage.actions[actionIndex];
+            const cards = workbenchWorkspace.querySelectorAll('.action-card');
+
+            cards.forEach(c => c.onclick = null); // desabilitar
+
+            const isCorrect = chosenAction.correct;
+
+            if (isCorrect) {
+                cards[actionIndex].classList.add('correct-action');
+            } else {
+                cards[actionIndex].classList.add('wrong-action');
+            }
+
+            processStageResult(isCorrect, chosenAction.text, stage.explanation);
+        }
+
+        // 3. RENDERIZADOR DE TERMINAL
+        function renderTerminalStage(stage) {
+            workbenchWorkspace.innerHTML = `
+                <div class="monitor-screen">
+                    <div class="border-bottom border-secondary pb-2 mb-3 text-muted small d-flex justify-content-between">
+                        <span>Terminal do Sistema de Suporte v2.4</span>
+                        <span>ADMINISTRADOR</span>
+                    </div>
+                    <div class="mb-3 text-light">
+                        C:\\Users\\Tecnico\\> Aguardando execução de comando de diagnóstico...
+                    </div>
+                    <div class="d-flex align-items-center gap-2">
+                        <span class="text-success fw-bold">C:\Users\Tecnico></span>
+                        <input type="text" id="term-input" class="terminal-input" placeholder="Digite o comando aqui..." autocomplete="off">
+                        <button class="btn btn-sm btn-outline-info" onclick="submitTerminalCommand()">Executar</button>
+                    </div>
+                    <div class="mt-3 small text-warning">${stage.hint}</div>
+                </div>
+            `;
+
+            // Ativar evento Enter no input
+            setTimeout(() => {
+                const input = document.getElementById('term-input');
+                if (input) {
+                    input.focus();
+                    input.addEventListener('keypress', function (e) {
+                        if (e.key === 'Enter') submitTerminalCommand();
+                    });
+                }
+            }, 100);
+        }
+
+        function submitTerminalCommand() {
+            const input = document.getElementById('term-input');
+            if (!input) return;
+
+            const typedCommand = input.value.trim().toLowerCase();
+            const stage = labStages[currentStageIndex];
+            const isCorrect = typedCommand === stage.expectedCommand.toLowerCase();
+
+            input.disabled = true;
+
+            const message = isCorrect
+                ? `Comando '${typedCommand}' executado com sucesso! Resposta e diagnósticos validados pelo sistema.`
+                : `Comando incorreto ou sintaxe inválida. O comando esperado para esta operação era '${stage.expectedCommand}'.`;
+
+            processStageResult(isCorrect, message, stage.explanation);
+        }
+
+        // 4. RENDERIZADOR DE TELEMETRIA
+        function renderTelemetryStage(stage) {
+            workbenchWorkspace.innerHTML = `
+                <div class="row g-4">
+                    <div class="col-md-5">
+                        <div class="monitor-screen">
+                            <h6 class="text-warning border-bottom border-secondary pb-2 mb-3"><i class="fa-solid fa-gauge-high me-2"></i>Telemetria da Bancada</h6>
+                            <div class="small mb-2">> CPU Temp: <span class="text-danger fw-bold">${stage.telemetryData.cpuTemp}</span></div>
+                            <div class="small mb-2">> GPU Temp: <span class="text-success">${stage.telemetryData.gpuTemp}</span></div>
+                            <div class="small mb-2">> Fan Speed: <span class="text-warning fw-bold">${stage.telemetryData.fanSpeed}</span></div>
+                            <div class="small mb-2">> Linha 12V: <span>${stage.telemetryData.v12}</span></div>
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <h6 class="fw-bold text-info mb-3"><i class="fa-solid fa-wrench me-2"></i>Ação de Reparo Recomendada:</h6>
+                        <div class="d-grid gap-2">
+                            ${stage.actions.map((act, idx) => `
+                                <div class="action-card" onclick="chooseActionCard(${idx})">
+                                    <span class="fw-semibold">${act.label}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // PROCESSAMENTO DE RESULTADO E FEEDBACK
+        function processStageResult(isCorrect, outcomeText, explanationTextContent) {
+            const stage = labStages[currentStageIndex];
+
+            if (isCorrect) {
+                score++;
+                feedbackPanel.className = 'feedback-box bg-emerald-950 border border-success text-emerald-200 mb-4 bg-success bg-opacity-25';
+                feedbackTitle.innerHTML = `<i class="fa-solid fa-circle-check text-success me-2"></i>Procedimento Correto!`;
+            } else {
+                feedbackPanel.className = 'feedback-box bg-rose-950 border border-danger text-rose-200 mb-4 bg-danger bg-opacity-25';
+                feedbackTitle.innerHTML = `<i class="fa-solid fa-circle-xmark text-danger me-2"></i>Procedimento Incorreto!`;
+            }
+
+            feedbackText.innerHTML = `<strong>Resultado:</strong> ${outcomeText}<br><br><strong>Aprofundamento Técnico:</strong> ${explanationTextContent}`;
+            feedbackPanel.classList.remove('d-none');
+
+            // Salvar no Histórico
+            userHistory.push({
+                title: stage.title,
+                category: stage.category,
+                isCorrect: isCorrect,
+                explanation: explanationTextContent
+            });
+
+            btnNextStage.classList.remove('d-none');
+        }
+
+        function nextStage() {
+            currentStageIndex++;
+            if (currentStageIndex < labStages.length) {
+                loadStage();
+            } else {
+                showFinalReport();
+            }
+        }
+
+        function showFinalReport() {
+            screenLab.classList.remove('active');
+            screenReport.classList.add('active');
+            headerStatus.classList.add('d-none');
+
+            const total = labStages.length;
+            const percent = Math.round((score / total) * 100);
+
+            document.getElementById('report-score').textContent = `${score}/${total}`;
+            document.getElementById('report-percent').textContent = `${percent}%`;
+
+            const badgeBox = document.getElementById('report-badge-box');
+            const iconEl = document.getElementById('report-icon');
+
+            if (percent >= 80) {
+                iconEl.className = 'fa-solid fa-trophy text-warning display-1';
+                badgeBox.className = 'alert alert-success border-0 mb-4';
+                badgeBox.innerHTML = `<h5><i class="fa-solid fa-medal me-2"></i>Técnico de Elite / Nível N3</h5>Parabéns! Excelente domínio técnico de bancada, montagem e diagnósticos avançados.`;
+            } else if (percent >= 50) {
+                iconEl.className = 'fa-solid fa-user-gear text-info display-1';
+                badgeBox.className = 'alert alert-info border-0 mb-4';
+                badgeBox.innerHTML = `<h5><i class="fa-solid fa-screwdriver-wrench me-2"></i>Técnico de Bancada / Nível N2</h5>Bom desempenho! Você possui bom raciocínio lógico em suporte, com margem para lapidar detalhes.`;
+            } else {
+                iconEl.className = 'fa-solid fa-book-open text-warning display-1';
+                badgeBox.className = 'alert alert-warning border-0 mb-4';
+                badgeBox.innerHTML = `<h5><i class="fa-solid fa-triangle-exclamation me-2"></i>Trainee em Treinamento</h5>Recomenda-se revisar conceitos de hardware e testes de sinal da placa-mãe.`;
+            }
+
+            // Gerar histórico de etapas
+            const listContainer = document.getElementById('report-summary-list');
+            listContainer.innerHTML = '';
+
+            userHistory.forEach((item, idx) => {
+                const el = document.createElement('div');
+                el.className = `p-3 mb-2 rounded border ${item.isCorrect ? 'border-success bg-success bg-opacity-10' : 'border-danger bg-danger bg-opacity-10'}`;
+                el.innerHTML = `
+                    <div class="d-flex justify-content-between align-items-center mb-1">
+                        <strong class="text-white">${idx + 1}. ${item.title}</strong>
+                        <span class="badge ${item.isCorrect ? 'bg-success' : 'bg-danger'}">${item.isCorrect ? 'Acertou' : 'Errou'}</span>
+                    </div>
+                    <small class="text-muted d-block mb-2">${item.category}</small>
+                    <small class="text-slate-300"><i class="fa-solid fa-info-circle me-1 text-info"></i>${item.explanation}</small>
+                `;
+                listContainer.appendChild(el);
+            });
+        }
+
+        function restartSimulation() {
+            startSimulation();
+        }
+    </script>
+</body>
+</html>

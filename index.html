@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BALATRO TECH — Deck de Diagnósticos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/css.css">
+</head>
+<body>
+
+    <!-- ========== TELA INICIAL ========== -->
+    <div id="screen-start" class="screen-start fade-in">
+        <div class="title-card">
+            <div class="suit-decor left">♠</div>
+            <div class="suit-decor right">♦</div>
+            <h1 class="game-title">BALATRO<br><span>TECH</span></h1>
+            <p class="subtitle">Deck de Diagnósticos de Hardware</p>
+            <div class="title-divider"></div>
+            <p class="desc">Jogue suas cartas de conhecimento técnico.<br>Monte mãos, diagnostique falhas e acumule fichas!</p>
+            <div class="feature-row">
+                <div class="mini-card"><i class="fa-solid fa-layer-group"></i><span>10 em 10</span></div>
+                <div class="mini-card"><i class="fa-solid fa-microchip"></i><span>Interativo</span></div>
+                <div class="mini-card"><i class="fa-solid fa-infinity"></i><span>Sem Tempo</span></div>
+            </div>
+            <div class="start-bank" id="start-bank">$0 no banco · 10 mãos</div>
+            <div class="start-actions">
+                <button id="btn-start-shop" class="btn-shop-outline">
+                    <i class="fa-solid fa-store me-1"></i> LOJA
+                </button>
+                <button id="btn-start" class="btn-deal">
+                    <i class="fa-solid fa-cards-blank me-2"></i> EMBARALHAR E JOGAR
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== TELA DO JOGO (estilo Balatro) ========== -->
+    <div id="screen-quiz" class="screen-quiz d-none">
+
+        <!-- Painel esquerdo -->
+        <aside class="side-panel">
+            <div class="panel-header">
+                <span class="panel-title">Mão <span id="question-counter">1</span>/<span id="question-total">10</span></span>
+            </div>
+
+            <div class="blind-box">
+                <div class="blind-label">CASO ATUAL</div>
+                <div class="blind-goal">
+                    <i class="fa-solid fa-microchip"></i>
+                    <span>Diagnóstico</span>
+                </div>
+                <div class="blind-reward">Recompensa: <strong>10 × mult</strong></div>
+            </div>
+
+            <div class="score-row">
+                <div class="score-box chips-box">
+                    <div class="score-label">Fichas</div>
+                    <div class="score-value" id="score-display">0</div>
+                </div>
+                <div class="score-x">×</div>
+                <div class="score-box mult-box">
+                    <div class="score-label">Mult</div>
+                    <div class="score-value" id="mult-display">1</div>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <div class="info-row">
+                    <span>Mãos restantes</span>
+                    <strong id="hands-left">10</strong>
+                </div>
+                <div class="info-row">
+                    <span>Acertos</span>
+                    <strong id="correct-count">0</strong>
+                </div>
+            </div>
+
+            <div class="money-box">
+                <i class="fa-solid fa-coins"></i>
+                <span id="money-display">$0</span>
+            </div>
+
+            <div class="side-actions">
+                <button id="btn-mid-shop" class="btn-side-shop" title="Loja da run">
+                    <i class="fa-solid fa-store"></i> LOJA
+                </button>
+                <button id="btn-home-quiz" class="btn-side-home" title="Voltar ao início">
+                    <i class="fa-solid fa-house"></i>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Área central da mesa -->
+        <main class="table-area">
+            <div class="problem-area">
+                <div class="problem-card" id="problem-card">
+                    <div class="card-rank top-left">
+                        <span id="card-rank">A</span>
+                        <span class="suit" id="card-suit">♠</span>
+                    </div>
+                    <div class="card-rank bottom-right">
+                        <span id="card-rank-b">A</span>
+                        <span class="suit" id="card-suit-b">♠</span>
+                    </div>
+                    <div class="card-body-content">
+                        <h5 id="question-text">Texto do problema...</h5>
+                        <div id="interactive-workspace" class="workspace"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="explanation-box" class="feedback-box d-none">
+                <div class="feedback-header" id="explanation-title"></div>
+                <p id="explanation-text" class="mb-0"></p>
+            </div>
+
+            <div class="hand-section">
+                <div class="hand-label">SUA MÃO — escolha uma carta</div>
+                <div id="options-container" class="hand-cards"></div>
+                <div class="hand-actions">
+                    <button id="btn-next" class="btn-next d-none">
+                        PRÓXIMA MÃO <i class="fa-solid fa-arrow-right ms-1"></i>
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- ========== TELA DE RESULTADO ========== -->
+    <div id="screen-result" class="screen-start d-none fade-in">
+        <div class="result-card">
+            <div class="result-icon" id="result-icon"><i class="fa-solid fa-trophy"></i></div>
+            <h2 class="result-title">MÃO FINAL!</h2>
+            <p id="result-badge" class="result-badge">Técnico Nível 3</p>
+            <div class="result-stats">
+                <div class="stat-box">
+                    <div class="stat-label">FICHAS</div>
+                    <div class="stat-value" id="final-score">0</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">ACERTOS</div>
+                    <div class="stat-value" id="final-accuracy">0/10</div>
+                </div>
+            </div>
+            <div class="accordion text-start mb-4" id="accordionSummary">
+                <div class="accordion-item border-0 bg-transparent">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed summary-btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSummary">
+                            <i class="fa-solid fa-list-check me-2"></i> Ver Histórico das Mãos
+                        </button>
+                    </h2>
+                    <div id="collapseSummary" class="accordion-collapse collapse" data-bs-parent="#accordionSummary">
+                        <div class="accordion-body p-0" id="summary-list"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="result-actions">
+                <button id="btn-shop" class="btn-shop">
+                    <i class="fa-solid fa-store me-2"></i> LOJA
+                </button>
+                <button id="btn-restart" class="btn-deal">
+                    <i class="fa-solid fa-rotate-right me-2"></i> NOVA PARTIDA
+                </button>
+                <button id="btn-home-result" class="btn-shop-outline">
+                    <i class="fa-solid fa-house me-2"></i> INÍCIO
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== LOJA ========== -->
+    <div id="screen-shop" class="screen-start d-none fade-in">
+        <div class="shop-card">
+            <div class="shop-header">
+                <h2 class="shop-title"><i class="fa-solid fa-store me-2"></i><span id="shop-mode-label">LOJA TECH</span></h2>
+                <div class="shop-money" id="shop-money">$0</div>
+            </div>
+            <p class="shop-desc" id="shop-desc-text">Compre pacotes de cartas para desbloquear novas mãos no próximo run!</p>
+            <div id="shop-items" class="shop-items"></div>
+            <div class="shop-footer">
+                <button id="btn-shop-close" class="btn-deal">
+                    <i class="fa-solid fa-play me-2"></i> JOGAR COM O BARALHO
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/script.js"></script>
+</body>
+</html>
