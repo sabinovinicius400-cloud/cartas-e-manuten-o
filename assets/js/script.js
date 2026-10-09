@@ -1175,6 +1175,7 @@ function resetState() {
     explanationBox.classList.add('d-none');
     explanationBox.className = 'feedback-box d-none';
     btnNext.classList.add('d-none');
+    optionsContainer.classList.remove('answered');
     optionsContainer.innerHTML = '';
 }
 
@@ -1207,6 +1208,7 @@ function selectAnswer(selectedIndex) {
             optionButtons[i].classList.add('dimmed');
         }
     }
+    optionsContainer.classList.add('answered');
 
     let gained = 0;
     const bonusPerHit = ownedUpgrades.includes('upgrade_bonus') ? 5 : 0;

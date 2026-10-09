@@ -692,6 +692,31 @@ body::after {
     z-index: 14 !important;
 }
 
+/* Depois de responder: cartas alinhadas e separadas */
+.hand-cards.answered {
+    gap: 16px !important;
+    align-items: flex-end;
+}
+.hand-cards.answered .play-card {
+    margin: 0 !important;
+    transform: none !important;
+    flex-shrink: 0;
+}
+.hand-cards.answered .play-card.dimmed {
+    opacity: 0.4;
+    filter: grayscale(0.4);
+    transform: none !important;
+}
+.hand-cards.answered .play-card.correct {
+    transform: translateY(-12px) !important;
+    z-index: 15 !important;
+}
+.hand-cards.answered .play-card.wrong {
+    transform: translateY(-4px) !important;
+    z-index: 14 !important;
+}
+
+
 .suit-red { color: #c41e3a; }
 .suit-black { color: #1a1a1a; }
 
