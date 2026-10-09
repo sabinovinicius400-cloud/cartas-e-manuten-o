@@ -588,12 +588,12 @@ body::after {
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    gap: 0;
-    padding: 0 6px;
+    gap: 14px;
+    padding: 8px 12px 4px;
     min-height: 240px;
 }
 
-/* Cartas em leque (estilo Balatro) — mais juntas */
+/* Cartas em leque — com espaço fixo (não se juntam ao responder) */
 .play-card {
     width: 155px;
     height: 210px;
@@ -614,20 +614,20 @@ body::after {
     align-items: center;
     text-align: center;
     flex-shrink: 0;
-    margin: 0 -10px;
+    margin: 0;
     -webkit-tap-highlight-color: transparent;
     touch-action: manipulation;
     user-select: none;
 }
 
-/* Leque suave */
-.play-card:nth-child(1) { transform: rotate(-4deg) translateY(4px); z-index: 1; }
-.play-card:nth-child(2) { transform: rotate(-1.2deg) translateY(1px); z-index: 2; }
-.play-card:nth-child(3) { transform: rotate(1.2deg) translateY(1px); z-index: 3; }
-.play-card:nth-child(4) { transform: rotate(4deg) translateY(4px); z-index: 4; }
+/* Leque suave (só rotação leve) */
+.play-card:nth-child(1) { transform: rotate(-3deg); z-index: 1; }
+.play-card:nth-child(2) { transform: rotate(-1deg); z-index: 2; }
+.play-card:nth-child(3) { transform: rotate(1deg); z-index: 3; }
+.play-card:nth-child(4) { transform: rotate(3deg); z-index: 4; }
 
 .play-card:hover:not(:disabled) {
-    transform: translateY(-22px) scale(1.05) rotate(0deg) !important;
+    transform: translateY(-18px) scale(1.04) rotate(0deg) !important;
     box-shadow:
         0 12px 0 #1a1a1a,
         0 18px 32px rgba(0,0,0,0.5),
@@ -635,14 +635,16 @@ body::after {
     z-index: 20 !important;
 }
 .play-card:active:not(:disabled) {
-    transform: translateY(-10px) scale(1.03) rotate(0deg) !important;
+    transform: translateY(-8px) scale(1.02) rotate(0deg) !important;
 }
 
 .play-card:disabled { cursor: default; }
 
+/* Escurece, mas MANTÉM o espaço da carta (não junta) */
 .play-card.dimmed {
-    opacity: 0.35;
-    transform: none !important;
+    opacity: 0.4;
+    filter: grayscale(0.35);
+    /* não zera o transform — evita cartas coladas */
 }
 
 .play-card .card-corner {
@@ -675,7 +677,8 @@ body::after {
     border-color: #059669 !important;
     box-shadow: 0 4px 0 #047857, 0 0 24px rgba(16,185,129,0.5) !important;
     opacity: 1 !important;
-    transform: translateY(-20px) scale(1.08) rotate(0deg) !important;
+    filter: none !important;
+    transform: translateY(-14px) scale(1.04) rotate(0deg) !important;
     z-index: 15 !important;
 }
 
@@ -684,7 +687,9 @@ body::after {
     border-color: #dc2626 !important;
     box-shadow: 0 4px 0 #991b1b, 0 0 16px rgba(239,68,68,0.4) !important;
     opacity: 1 !important;
-    transform: rotate(0deg) !important;
+    filter: none !important;
+    transform: translateY(-6px) rotate(0deg) !important;
+    z-index: 14 !important;
 }
 
 .suit-red { color: #c41e3a; }
