@@ -1228,6 +1228,11 @@ body::after {
 
 .shop-footer {
     text-align: center;
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
 }
 /* ========== SIDE ACTIONS (loja + home no painel) ========== */
 .side-actions {

@@ -8,197 +8,197 @@ const baseQuestions = [
     {
         type: "interactive-mb-view",
         rank: "A", suit: "♠",
-        question: "🛠️ BANCADA ABERTA: Chegou um upgrade de memória. Onde o pente de RAM deve ser instalado na placa-mãe?",
+        question: "🛠️ ONDE VAI A MEMÓRIA? Você comprou um pente de RAM. Em qual lugar da placa-mãe ele encaixa?",
         options: [
-            { text: "Instalar RAM no Slot DIMM", icon: "fa-solid fa-memory" },
-            { text: "Instalar GPU no Soquete da CPU", icon: "fa-solid fa-microchip" },
-            { text: "Aplicar Pasta no Slot PCI-E", icon: "fa-solid fa-flask" },
-            { text: "Instalar GPU no Slot DIMM", icon: "fa-solid fa-network-wired" }
+            { text: "No encaixe longo da memória (DIMM)", icon: "fa-solid fa-memory" },
+            { text: "No soquete do processador", icon: "fa-solid fa-microchip" },
+            { text: "No slot da placa de vídeo, com pasta", icon: "fa-solid fa-flask" },
+            { text: "No encaixe da memória, mas a placa de vídeo", icon: "fa-solid fa-network-wired" }
         ],
         correct: 0,
-        explanation: "A memória RAM deve ser encaixada no slot DIMM alinhando a chanfradura central com a trava do slot."
+        explanation: "A memória RAM encaixa só nos slots longos chamados DIMM. Alinhe o corte do pente com o encaixe e trave."
     },
     {
         type: "interactive-beeps",
         rank: "K", suit: "♥",
-        question: "🔊 POST MISTERIOSO: As fans ligam, a tela fica preta e o speaker da placa-mãe solta três beeps longos. Qual a jogada certa?",
+        question: "🔊 TELA PRETA E 3 BIPS: O PC liga os coolers, a tela não acende e ouvem-se 3 bips longos. O que fazer primeiro?",
         beepInfo: "🔊 Bip... Bip... Bip... (3 Beeps Longos no POST)",
         options: [
-            { text: "Superaquecimento extremo na CPU", icon: "fa-solid fa-temperature-arrow-up" },
-            { text: "Remover RAM, limpar e reencaixar", icon: "fa-solid fa-memory" },
-            { text: "Defeito na fonte de alimentação", icon: "fa-solid fa-plug" },
-            { text: "Bateria CMOS com baixa carga", icon: "fa-solid fa-battery-quarter" }
+            { text: "Achar que a CPU esquentou demais", icon: "fa-solid fa-temperature-arrow-up" },
+            { text: "Tirar a memória, limpar e encaixar de novo", icon: "fa-solid fa-memory" },
+            { text: "Trocar a fonte de energia", icon: "fa-solid fa-plug" },
+            { text: "Trocar a pilhinha da placa-mãe", icon: "fa-solid fa-battery-quarter" }
         ],
         correct: 1,
-        explanation: "A sequência de 3 beeps no POST é o aviso padrão do BIOS informando erro de leitura ou mau contato no módulo de memória RAM."
+        explanation: "Três bips longos costumam indicar problema na memória RAM. Reencaixar ou testar outro pente resolve muitos casos."
     },
     {
         type: "interactive-telemetry",
         rank: "Q", suit: "♦",
-        question: "🔍 ALERTA TÉRMICO: O computador do cliente desliga sozinho depois de uns 10 minutos. Olhe o painel de sensores e escolha a ação:",
+        question: "🔍 PC DESLIGA SOZINHO: Depois de uns 10 minutos o PC desliga. Veja os sensores e escolha a ação certa:",
         sensorData: {
             temp: "95°C (ALERTA CRÍTICO)",
             rpm: "0 RPM (COOLER TRAVADO)",
             volt: "12.1 V (TENSÃO OK)"
         },
         options: [
-            { text: "Trocar a Fonte por uma mais forte", icon: "fa-solid fa-bolt" },
-            { text: "Trocar o Cooler parado/queimado", icon: "fa-solid fa-fan" },
-            { text: "Formatar o disco e reinstalar SO", icon: "fa-solid fa-compact-disc" },
-            { text: "Trocar o cabo SATA da placa-mãe", icon: "fa-solid fa-cable-car" }
+            { text: "Colocar uma fonte mais forte", icon: "fa-solid fa-bolt" },
+            { text: "Trocar o cooler que está parado", icon: "fa-solid fa-fan" },
+            { text: "Formatar e reinstalar o Windows", icon: "fa-solid fa-compact-disc" },
+            { text: "Trocar o cabo do disco rígido", icon: "fa-solid fa-cable-car" }
         ],
         correct: 1,
-        explanation: "Com a ventoinha em 0 RPM e a temperatura em 95°C, o processador desliga automaticamente por proteção térmica (Thermal Shutdown)."
+        explanation: "A ventoinha está parada (0 RPM) e a temperatura em 95°C. O processador desliga sozinho para não queimar."
     },
     {
         type: "interactive-component",
         rank: "J", suit: "♣",
-        question: "🌡️ CONTATO TÉRMICO: Antes de fechar o cooler sobre a CPU, o que NÃO pode faltar entre o processador e o dissipador?",
+        question: "🌡️ PASTA ENTRE CPU E COOLER: Antes de prender o cooler no processador, o que precisa ficar no meio?",
         componentView: "Componente: Processador + Dissipador de Alumínio",
         options: [
-            { text: "Cola de silicone de alta aderência", icon: "fa-solid fa-bottle-droplet" },
-            { text: "Óleo lubrificante antiferrugem", icon: "fa-solid fa-oil-can" },
-            { text: "Pasta Térmica para condução de calor", icon: "fa-solid fa-flask-vial" },
-            { text: "Fita adesiva isolante condutora", icon: "fa-solid fa-tape" }
+            { text: "Cola de silicone", icon: "fa-solid fa-bottle-droplet" },
+            { text: "Óleo lubrificante", icon: "fa-solid fa-oil-can" },
+            { text: "Pasta térmica", icon: "fa-solid fa-flask-vial" },
+            { text: "Fita isolante", icon: "fa-solid fa-tape" }
         ],
         correct: 2,
-        explanation: "A pasta térmica preenche as imperfeições microscópicas do metal, garantindo a rápida transferência de calor da CPU para o cooler."
+        explanation: "A pasta térmica ajuda o calor a passar do processador para o cooler. Sem ela, a CPU esquenta demais."
     },
     {
         type: "interactive-bios",
         rank: "10", suit: "♠",
-        question: "⚙️ FIRMWARE MODERNO: O cliente trouxe um SSD de 4TB. Qual modo de firmware permite partições maiores que 2TB?",
+        question: "⚙️ DISCO GRANDE (4TB): Qual modo na BIOS/UEFI permite usar discos maiores que 2TB direito?",
         biosView: "Firmware Mode: [ Legacy BIOS ] ➔ Alterar para padrão moderno",
         options: [
-            { text: "Legacy BIOS tradicional MS-DOS", icon: "fa-solid fa-terminal" },
-            { text: "UEFI + GPT + Secure Boot", icon: "fa-solid fa-gears" },
-            { text: "CMOS Basic Mode de 16-bits", icon: "fa-solid fa-microchip" },
-            { text: "Modo Protegido sem partições", icon: "fa-solid fa-shield-halved" }
+            { text: "Modo antigo (Legacy BIOS)", icon: "fa-solid fa-terminal" },
+            { text: "Modo moderno UEFI (com GPT)", icon: "fa-solid fa-gears" },
+            { text: "Modo básico de 16 bits", icon: "fa-solid fa-microchip" },
+            { text: "Modo sem partições", icon: "fa-solid fa-shield-halved" }
         ],
         correct: 1,
-        explanation: "O UEFI substituiu o BIOS clássico e permite o uso de partições GPT maiores que 2TB, além de boot mais rápido e seguro."
+        explanation: "O modo UEFI (com partição GPT) aceita discos grandes. O modo antigo Legacy tem limite perto de 2TB."
     },
     {
         type: "interactive-cmd",
         rank: "9", suit: "♥",
-        question: "🌐 SEM REDE: O cabo está plugado, o LED acende, mas não há internet. Qual comando testa se a placa de rede responde localmente?",
+        question: "🌐 SEM INTERNET: O cabo está ligado e o LED acende, mas não navega. Qual comando testa se a placa de rede funciona?",
         cmdView: "C:\\Users\\Tecnico> _",
         options: [
-            { text: "ping 127.0.0.1 (testar placa de rede)", icon: "fa-solid fa-network-wired" },
-            { text: "format C: /q (formatar unidade)", icon: "fa-solid fa-trash-can" },
-            { text: "shutdown -s -t 0 (desligar PC)", icon: "fa-solid fa-power-off" },
-            { text: "chkdsk /f (verificar disco)", icon: "fa-solid fa-hard-drive" }
+            { text: "ping 127.0.0.1 (testa a própria placa)", icon: "fa-solid fa-network-wired" },
+            { text: "format C: (apaga o disco)", icon: "fa-solid fa-trash-can" },
+            { text: "shutdown (desliga o PC)", icon: "fa-solid fa-power-off" },
+            { text: "chkdsk (verifica o disco)", icon: "fa-solid fa-hard-drive" }
         ],
         correct: 0,
-        explanation: "O endereço IP 127.0.0.1 é a interface interna de loopback. O teste confirma se o hardware da placa de rede está respondendo."
+        explanation: "127.0.0.1 é o endereço da própria máquina. Se o ping responder, a placa de rede está funcionando."
     },
     {
         type: "interactive-component",
         rank: "8", suit: "♦",
-        question: "💨 JATO DE AR: Na limpeza com ar comprimido, o que fazer com as ventoinhas para não danificar a placa-mãe?",
+        question: "💨 LIMPEZA COM AR: Ao usar ar comprimido nas ventoinhas, o que você deve fazer?",
         componentView: "Ferramenta: Compressor de Ar + Ventoinhas",
         options: [
-            { text: "Deixar girar no limite máximo", icon: "fa-solid fa-wind" },
+            { text: "Deixar girar bem rápido", icon: "fa-solid fa-wind" },
             { text: "Segurar as pás para não girarem", icon: "fa-solid fa-hand" },
-            { text: "Molhar as pás com água saponácea", icon: "fa-solid fa-droplet" },
-            { text: "Inverter a polaridade dos cabos", icon: "fa-solid fa-arrows-rotate" }
+            { text: "Molhar com água e sabão", icon: "fa-solid fa-droplet" },
+            { text: "Inverter os fios da ventoinha", icon: "fa-solid fa-arrows-rotate" }
         ],
         correct: 1,
-        explanation: "Girar a ventoinha com ar de fora faz o motor agir como gerador (dínamo), enviando tensão de retorno que pode queimar a placa-mãe."
+        explanation: "Se a ventoinha girar com o ar, ela pode gerar energia de volta e danificar a placa. Segure as pás na limpeza."
     },
     {
         type: "interactive-component",
         rank: "7", suit: "♣",
-        question: "🔋 RELÓGIO ZERADO: Sempre que o PC sai da tomada, a data volta para 2010. Qual componente da placa-mãe precisa ser trocado?",
+        question: "🔋 DATA VOLTA NO TEMPO: Sem energia, a data do PC volta para 2010. O que trocar na placa-mãe?",
         componentView: "Placa-Mãe: Soquete de Bateria Moeda (CR2032)",
         options: [
-            { text: "Substituir a Bateria CMOS CR2032", icon: "fa-solid fa-battery-half" },
-            { text: "Trocar o processador por outro", icon: "fa-solid fa-microchip" },
+            { text: "Trocar a pilha CMOS (CR2032)", icon: "fa-solid fa-battery-half" },
+            { text: "Trocar o processador", icon: "fa-solid fa-microchip" },
             { text: "Trocar os cabos de energia", icon: "fa-solid fa-plug" },
-            { text: "Substituir o pente de RAM", icon: "fa-solid fa-memory" }
+            { text: "Trocar a memória RAM", icon: "fa-solid fa-memory" }
         ],
         correct: 0,
-        explanation: "A bateria CR2032 alimenta o chip CMOS responsável por manter as configurações da BIOS e a hora do sistema quando desligado."
+        explanation: "A pilha redonda da placa-mãe (CMOS) guarda a hora e as configurações quando o PC está desligado."
     },
     {
         type: "interactive-component",
         rank: "6", suit: "♠",
-        question: "⚡ MULTÍMETRO NA FONTE: No cabo ATX, o fio amarelo deve medir qual tensão contínua (DC)?",
+        question: "⚡ FIO AMARELO DA FONTE: No cabo da fonte, o fio amarelo deve marcar quantos volts?",
         componentView: "Fonte ATX: Amarelo (+12V) | Vermelho (+5V) | Laranja (+3.3V)",
         options: [
-            { text: "+12V DC (CPU e Placa de Vídeo)", icon: "fa-solid fa-bolt" },
-            { text: "+220V AC Alternada", icon: "fa-solid fa-plug-circle-bolt" },
-            { text: "+3.3V DC", icon: "fa-solid fa-car-battery" },
-            { text: "0V / Terra (Gnd)", icon: "fa-solid fa-minus" }
+            { text: "+12 volts (CPU e placa de vídeo)", icon: "fa-solid fa-bolt" },
+            { text: "+220 volts da tomada", icon: "fa-solid fa-plug-circle-bolt" },
+            { text: "+3,3 volts", icon: "fa-solid fa-car-battery" },
+            { text: "0 volts (terra)", icon: "fa-solid fa-minus" }
         ],
         correct: 0,
-        explanation: "No padrão de cores ATX, o fio Amarelo transporta a linha de +12V, o Vermelho +5V e o Laranja +3.3V."
+        explanation: "No padrão ATX: amarelo = +12V, vermelho = +5V, laranja = +3,3V."
     },
     {
         type: "interactive-component",
         rank: "5", suit: "♥",
-        question: "🛡️ ARQUIVOS SEQUESTRADOS: Extensões viraram '.locked' e uma mensagem pede pagamento em criptomoeda. Que tipo de ameaça é essa?",
+        question: "🛡️ ARQUIVOS BLOQUEADOS: Os arquivos viraram .locked e aparece pedido de pagamento. Que ataque é esse?",
         componentView: "Alerta: 'Seus arquivos foram criptografados!'",
         options: [
-            { text: "Vírus de Adware comum", icon: "fa-solid fa-rectangle-ad" },
-            { text: "Ataque de Ransomware", icon: "fa-solid fa-user-ninja" },
-            { text: "Falha física de Bad Blocks", icon: "fa-solid fa-triangle-exclamation" },
-            { text: "Erro do Windows Update", icon: "fa-solid fa-window-restore" }
+            { text: "Adware (anúncios)", icon: "fa-solid fa-rectangle-ad" },
+            { text: "Ransomware (sequestro de arquivos)", icon: "fa-solid fa-user-ninja" },
+            { text: "Disco com setores ruins", icon: "fa-solid fa-triangle-exclamation" },
+            { text: "Erro de atualização do Windows", icon: "fa-solid fa-window-restore" }
         ],
         correct: 1,
-        explanation: "O Ransomware criptografa os arquivos da vítima e exige o pagamento de um resgate para fornecer a chave de descriptografia."
+        explanation: "Ransomware tranca seus arquivos e pede dinheiro pela chave. O melhor é backup e antivírus em dia."
     },
     // ===== NOVAS PERGUNTAS BASE =====
     {
         type: "interactive-component",
         rank: "4", suit: "♠",
-        question: "🔌 USB SEM ENERGIA: O cliente diz que o pendrive não é reconhecido e o LED do dispositivo não acende. Qual verificação primeiro?",
+        question: "🔌 PENDRIVE NÃO LIGA: O LED do pendrive não acende e o PC não reconhece. O que testar primeiro?",
         componentView: "Porta USB-A / USB-C + dispositivo externo",
         options: [
-            { text: "Testar em outra porta e outro cabo/dispositivo", icon: "fa-solid fa-usb" },
-            { text: "Formatar o HD principal imediatamente", icon: "fa-solid fa-eraser" },
-            { text: "Trocar a pasta térmica da CPU", icon: "fa-solid fa-flask" },
-            { text: "Desligar o Secure Boot e esperar", icon: "fa-solid fa-shield" }
+            { text: "Testar outra porta USB e outro aparelho", icon: "fa-solid fa-usb" },
+            { text: "Formatar o disco principal", icon: "fa-solid fa-eraser" },
+            { text: "Trocar a pasta térmica", icon: "fa-solid fa-flask" },
+            { text: "Desligar o Secure Boot", icon: "fa-solid fa-shield" }
         ],
         correct: 0,
-        explanation: "Portas USB e cabos falham com frequência. Isolar o problema testando outra porta e outro dispositivo evita troca desnecessária de peças."
+        explanation: "Porta ou cabo pode estar com defeito. Teste outra porta e outro pendrive antes de trocar peças."
     },
     {
         type: "interactive-beeps",
         rank: "3", suit: "♥",
-        question: "🔊 UM BEEP CONTÍNUO: O speaker emite um bip longo e contínuo logo após ligar. O que isso costuma indicar?",
+        question: "🔊 BIP LONGO E CONTÍNUO: Ao ligar, o PC faz um bip longo sem parar. O que isso costuma significar?",
         beepInfo: "🔊 Biiiiiiiiip... (1 Beep longo contínuo)",
         options: [
-            { text: "Erro de memória RAM (POST clássico)", icon: "fa-solid fa-memory" },
-            { text: "Windows corrompido", icon: "fa-solid fa-windows" },
-            { text: "Monitor desconectado apenas", icon: "fa-solid fa-desktop" },
-            { text: "Driver de áudio desatualizado", icon: "fa-solid fa-volume-high" }
+            { text: "Problema na memória RAM", icon: "fa-solid fa-memory" },
+            { text: "Windows estragado", icon: "fa-solid fa-windows" },
+            { text: "Só o monitor desconectado", icon: "fa-solid fa-desktop" },
+            { text: "Driver de som desatualizado", icon: "fa-solid fa-volume-high" }
         ],
         correct: 0,
-        explanation: "Em muitos BIOS AMI/Award, um beep longo contínuo aponta falha de memória. Reencaixar ou trocar os pentes de RAM é o primeiro passo."
+        explanation: "Bip longo contínuo muitas vezes aponta falha de memória. Reencaixe ou teste outro pente de RAM."
     },
     {
         type: "interactive-telemetry",
         rank: "2", suit: "♦",
-        question: "🔥 GPU QUENTE: Jogos travam e a placa de vídeo chega a 95°C. Sensores mostram fan da GPU em 20%. O que fazer?",
+        question: "🔥 PLACA DE VÍDEO QUENTE: Os jogos travam e a placa chega a 95°C, com ventoinha fraca. O que fazer?",
         sensorData: {
             temp: "GPU 95°C (CRÍTICO)",
             rpm: "FAN GPU 20% (BAIXA)",
             volt: "12.0 V (OK)"
         },
         options: [
-            { text: "Limpar dissipador e conferir curva da fan da GPU", icon: "fa-solid fa-fan" },
+            { text: "Limpar a placa e aumentar a velocidade da ventoinha", icon: "fa-solid fa-fan" },
             { text: "Trocar só o processador", icon: "fa-solid fa-microchip" },
             { text: "Formatar e instalar Linux", icon: "fa-solid fa-linux" },
-            { text: "Remover toda a RAM", icon: "fa-solid fa-memory" }
+            { text: "Tirar toda a memória", icon: "fa-solid fa-memory" }
         ],
         correct: 0,
-        explanation: "Poeira no dissipador e curva de ventilador agressiva demais (ou travada) fazem a GPU aquecer. Limpeza + ajuste de fan resolvem a maioria dos casos."
+        explanation: "Poeira e ventoinha lenta fazem a placa esquentar. Limpe e ajuste a ventoinha."
     },
     {
         type: "interactive-cmd",
         rank: "A", suit: "♣",
-        question: "🖥️ IP ESTÁTICO: O cliente precisa de IP fixo na rede local. Qual comando no Windows mostra a configuração atual de rede?",
+        question: "🖥️ VER REDE NO WINDOWS: Qual comando mostra o IP e as configurações de rede atuais?",
         cmdView: "C:\\Users\\Tecnico> _",
         options: [
             { text: "ipconfig /all", icon: "fa-solid fa-terminal" },
@@ -207,35 +207,35 @@ const baseQuestions = [
             { text: "diskpart", icon: "fa-solid fa-database" }
         ],
         correct: 0,
-        explanation: "ipconfig /all lista endereços IP, máscara, gateway e DNS de todas as interfaces — essencial antes de definir IP estático."
+        explanation: "O comando ipconfig /all mostra IP, máscara, gateway e DNS de todas as placas de rede."
     },
     {
         type: "interactive-component",
         rank: "K", suit: "♠",
-        question: "🖱️ SEM MOUSE: Após montar o PC, teclado e mouse USB não respondem no POST. Qual causa comum?",
+        question: "🖱️ TECLADO E MOUSE MORTOS: Acabou de montar o PC e USB do painel frontal não funciona. Causa comum?",
         componentView: "Painel frontal + portas USB da placa-mãe",
         options: [
-            { text: "Cabos do painel frontal USB invertidos ou soltos", icon: "fa-solid fa-plug" },
-            { text: "Pasta térmica em excesso na GPU", icon: "fa-solid fa-flask" },
-            { text: "SSD NVMe no slot errado de RAM", icon: "fa-solid fa-memory" },
-            { text: "Antena Wi-Fi desconectada", icon: "fa-solid fa-wifi" }
+            { text: "Cabos USB do painel frontal soltos ou invertidos", icon: "fa-solid fa-plug" },
+            { text: "Pasta térmica em excesso na placa de vídeo", icon: "fa-solid fa-flask" },
+            { text: "SSD no slot da memória", icon: "fa-solid fa-memory" },
+            { text: "Antena Wi-Fi solta", icon: "fa-solid fa-wifi" }
         ],
         correct: 0,
-        explanation: "Os conectores USB do painel frontal (F_USB) precisam estar no header correto e na polaridade certa. Invertidos, as portas não funcionam."
+        explanation: "Os fios USB da frente do gabinete precisam estar no conector certo da placa-mãe. Invertidos, não funcionam."
     },
     {
         type: "interactive-bios",
         rank: "Q", suit: "♥",
-        question: "⏱️ XMP/DOCP: A RAM é 3200 MHz, mas o sistema roda em 2133 MHz. O que ativar na BIOS?",
+        question: "⏱️ MEMÓRIA LENTA: A RAM é de 3200 MHz, mas o PC usa só 2133. O que ligar na BIOS?",
         biosView: "Memory Profile: [ Default 2133 ] ➔ Ativar perfil de overclock",
         options: [
-            { text: "Ativar perfil XMP (Intel) ou DOCP/EOCP (AMD)", icon: "fa-solid fa-gauge-high" },
-            { text: "Desligar o Secure Boot e reiniciar", icon: "fa-solid fa-shield" },
-            { text: "Mudar de UEFI para Legacy", icon: "fa-solid fa-terminal" },
-            { text: "Zerar o CMOS e deixar padrão", icon: "fa-solid fa-battery-empty" }
+            { text: "Ativar XMP (Intel) ou DOCP (AMD)", icon: "fa-solid fa-gauge-high" },
+            { text: "Desligar Secure Boot", icon: "fa-solid fa-shield" },
+            { text: "Mudar para modo Legacy", icon: "fa-solid fa-terminal" },
+            { text: "Zerar a BIOS e deixar padrão", icon: "fa-solid fa-battery-empty" }
         ],
         correct: 0,
-        explanation: "JEDEC padrão é conservador. XMP/DOCP aplica as frequências e timings anunciados pelo fabricante do pente de RAM."
+        explanation: "XMP/DOCP faz a memória rodar na velocidade anunciada na caixa, em vez da velocidade baixa padrão."
     }
 ];
 
@@ -246,46 +246,46 @@ const packQuestions = {
             type: "interactive-component",
             rank: "4", suit: "♦",
             pack: "storage",
-            question: "💾 DISCO MORTO: O PC liga, mas não encontra o sistema. O cabo de dados do SSD está frouxo. Qual conector deve estar firme na placa-mãe?",
+            question: "💾 PC LIGA SEM SISTEMA: O cabo de dados do SSD pode estar frouxo. Qual deve estar bem encaixado?",
             componentView: "SSD / HD ↔ Placa-Mãe: cabo de dados",
             options: [
                 { text: "Cabo SATA de dados bem encaixado", icon: "fa-solid fa-hard-drive" },
-                { text: "Apenas o cabo de força da fonte", icon: "fa-solid fa-plug" },
-                { text: "Cabo VGA do monitor", icon: "fa-solid fa-desktop" },
-                { text: "Antena Wi-Fi externa", icon: "fa-solid fa-wifi" }
+                { text: "Só o cabo de energia da fonte", icon: "fa-solid fa-plug" },
+                { text: "Cabo do monitor", icon: "fa-solid fa-desktop" },
+                { text: "Antena Wi-Fi", icon: "fa-solid fa-wifi" }
             ],
             correct: 0,
-            explanation: "O cabo SATA transmite os dados entre o SSD/HD e a placa-mãe. Sem ele bem conectado, o disco não é detectado no boot."
+            explanation: "O cabo SATA leva os dados do disco até a placa-mãe. Frouxo, o PC não acha o sistema."
         },
         {
             type: "interactive-component",
             rank: "3", suit: "♣",
             pack: "storage",
-            question: "📀 CLONE DE DISCO: O cliente quer migrar o Windows de um HD antigo para um SSD novo. Qual interface é a mais rápida para SSD moderno?",
+            question: "📀 TROCAR HD POR SSD: Qual tipo de SSD é o mais rápido hoje em dia?",
             componentView: "Comparativo: SATA III vs NVMe M.2",
             options: [
                 { text: "SSD NVMe no slot M.2", icon: "fa-solid fa-bolt" },
-                { text: "HD 5400 RPM por USB 2.0", icon: "fa-solid fa-hard-drive" },
-                { text: "Disquete de 1.44 MB", icon: "fa-solid fa-save" },
-                { text: "CD-ROM IDE legado", icon: "fa-solid fa-compact-disc" }
+                { text: "HD antigo por USB 2.0", icon: "fa-solid fa-hard-drive" },
+                { text: "Disquete", icon: "fa-solid fa-save" },
+                { text: "CD-ROM antigo", icon: "fa-solid fa-compact-disc" }
             ],
             correct: 0,
-            explanation: "SSDs NVMe em slot M.2 usam o barramento PCIe e são bem mais rápidos que SATA III tradicional."
+            explanation: "SSD NVMe (slot M.2) é bem mais rápido que SSD ou HD ligados por cabo SATA."
         },
         {
             type: "interactive-component",
             rank: "2", suit: "♥",
             pack: "storage",
-            question: "🗄️ SMART ALERTA: O software de disco mostra 'Reallocated Sectors' alto. O que isso significa?",
+            question: "🗄️ AVISO DO DISCO: O programa do disco mostra muitos setores realocados. O que fazer?",
             componentView: "SMART: Reallocated Sector Count = 1200 (CRÍTICO)",
             options: [
-                { text: "HD/SSD com setores ruins — fazer backup e trocar", icon: "fa-solid fa-triangle-exclamation" },
-                { text: "Apenas poeira no cooler", icon: "fa-solid fa-fan" },
+                { text: "Disco com defeito — fazer backup e trocar", icon: "fa-solid fa-triangle-exclamation" },
+                { text: "Só poeira no cooler", icon: "fa-solid fa-fan" },
                 { text: "Driver de vídeo desatualizado", icon: "fa-solid fa-display" },
                 { text: "Cabo de rede solto", icon: "fa-solid fa-ethernet" }
             ],
             correct: 0,
-            explanation: "Setores realocados indicam degradação física do disco. Backup imediato e substituição evitam perda de dados."
+            explanation: "Setores ruins indicam disco falhando. Faça backup e troque o disco antes de perder arquivos."
         }
     ],
     network: [
@@ -293,46 +293,46 @@ const packQuestions = {
             type: "interactive-cmd",
             rank: "2", suit: "♠",
             pack: "network",
-            question: "🌐 DNS FALHOU: O ping em 8.8.8.8 funciona, mas sites por nome não abrem. Qual é o problema mais provável?",
+            question: "🌐 SITES NÃO ABREM: O ping em 8.8.8.8 funciona, mas digitar o nome do site falha. Qual o problema?",
             cmdView: "C:\\> ping 8.8.8.8  →  OK\nC:\\> ping google.com  →  falha",
             options: [
-                { text: "Problema de DNS / servidores de nome", icon: "fa-solid fa-server" },
-                { text: "Fonte de alimentação fraca", icon: "fa-solid fa-bolt" },
-                { text: "Pasta térmica ressecada", icon: "fa-solid fa-flask" },
-                { text: "Bateria CMOS esgotada", icon: "fa-solid fa-battery-empty" }
+                { text: "Problema de DNS (nome dos sites)", icon: "fa-solid fa-server" },
+                { text: "Fonte fraca", icon: "fa-solid fa-bolt" },
+                { text: "Pasta térmica velha", icon: "fa-solid fa-flask" },
+                { text: "Pilha da placa-mãe fraca", icon: "fa-solid fa-battery-empty" }
             ],
             correct: 0,
-            explanation: "Se o IP responde e o nome não, a resolução DNS está falhando. Trocar DNS (ex.: 8.8.8.8) costuma resolver."
+            explanation: "Se o número (IP) funciona e o nome do site não, o DNS está com problema. Trocar o DNS costuma resolver."
         },
         {
             type: "interactive-component",
             rank: "A", suit: "♥",
             pack: "network",
-            question: "📡 WI-FI AUSENTE: Notebook novo sem antenas ligadas na placa wireless. O que fazer?",
+            question: "📡 WI-FI FRACO OU ZERADO: No notebook, as antenas da placa Wi-Fi estão soltas. O que fazer?",
             componentView: "Placa Mini PCIe / M.2 Wi-Fi + cabos de antena",
             options: [
-                { text: "Conectar os cabos de antena na placa Wi-Fi", icon: "fa-solid fa-wifi" },
-                { text: "Formatar o SSD imediatamente", icon: "fa-solid fa-eraser" },
-                { text: "Trocar a pasta térmica da GPU", icon: "fa-solid fa-fan" },
-                { text: "Inverter polaridade da bateria CMOS", icon: "fa-solid fa-battery-half" }
+                { text: "Conectar as antenas na placa Wi-Fi", icon: "fa-solid fa-wifi" },
+                { text: "Formatar o disco", icon: "fa-solid fa-eraser" },
+                { text: "Trocar pasta térmica da placa de vídeo", icon: "fa-solid fa-fan" },
+                { text: "Inverter a pilha da placa-mãe", icon: "fa-solid fa-battery-half" }
             ],
             correct: 0,
-            explanation: "Placas wireless internas precisam dos cabos de antena conectados; sem isso o sinal fica péssimo ou inexistente."
+            explanation: "Sem as antenas ligadas na placa Wi-Fi, o sinal fica péssimo ou some."
         },
         {
             type: "interactive-cmd",
             rank: "K", suit: "♦",
             pack: "network",
-            question: "🔄 IP CONFLITO: Dois PCs na mesma rede com o mesmo endereço. Qual comando libera e renova o IP no Windows?",
+            question: "🔄 IP REPETIDO NA REDE: Dois PCs com o mesmo IP. Qual comando pede um IP novo no Windows?",
             cmdView: "C:\\> ipconfig /release && ipconfig /renew",
             options: [
                 { text: "ipconfig /release e depois /renew", icon: "fa-solid fa-arrows-rotate" },
-                { text: "format C: /fs:ntfs", icon: "fa-solid fa-eraser" },
-                { text: "shutdown /r /t 0", icon: "fa-solid fa-power-off" },
-                { text: "netsh winsock reset apenas", icon: "fa-solid fa-network-wired" }
+                { text: "format C:", icon: "fa-solid fa-eraser" },
+                { text: "shutdown (reiniciar)", icon: "fa-solid fa-power-off" },
+                { text: "netsh winsock reset", icon: "fa-solid fa-network-wired" }
             ],
             correct: 0,
-            explanation: "release libera o lease atual e renew pede um novo IP ao DHCP, resolvendo conflito quando o servidor redistribui."
+            explanation: "release solta o IP atual e renew pede outro ao roteador — útil em conflito de endereço."
         }
     ],
     power: [
@@ -340,37 +340,37 @@ const packQuestions = {
             type: "interactive-component",
             rank: "K", suit: "♦",
             pack: "power",
-            question: "⚡ PC NÃO LIGA: Ao pressionar o power, nada acontece — nem LED nem cooler. Qual teste clássico de fonte?",
+            question: "⚡ PC TOTALMENTE MORTO: Apertar o botão não acende LED nem cooler. Qual teste clássico da fonte?",
             componentView: "Fonte ATX: teste de jump no conector 24 pinos",
             options: [
-                { text: "Teste de jump (ligar fonte fora do gabinete)", icon: "fa-solid fa-plug" },
-                { text: "Reinstalar o Windows no escuro", icon: "fa-solid fa-windows" },
-                { text: "Trocar só o mouse USB", icon: "fa-solid fa-computer-mouse" },
-                { text: "Atualizar drivers de áudio", icon: "fa-solid fa-volume-high" }
+                { text: "Teste de jump na fonte (fora do gabinete)", icon: "fa-solid fa-plug" },
+                { text: "Reinstalar o Windows", icon: "fa-solid fa-windows" },
+                { text: "Trocar o mouse", icon: "fa-solid fa-computer-mouse" },
+                { text: "Atualizar driver de som", icon: "fa-solid fa-volume-high" }
             ],
             correct: 0,
-            explanation: "O jump no conector 24 pinos (fio verde + preto) testa se a fonte liga isolada. Se não ligar, a fonte ou a tomada é o problema."
+            explanation: "O teste de jump verifica se a fonte liga sozinha. Se não ligar, o problema é fonte ou tomada."
         },
         {
             type: "interactive-component",
             rank: "Q", suit: "♣",
             pack: "power",
-            question: "🔋 GPU SEM IMAGEM: Placa de vídeo high-end instalada, mas a tela não acende. O que falta além do PCIe?",
+            question: "🔋 PLACA DE VÍDEO SEM IMAGEM: A placa está no slot, mas a tela não acende. O que costuma faltar?",
             componentView: "GPU: slot PCIe + conectores extras de energia",
             options: [
-                { text: "Conectores PCIe de energia da fonte (6/8 pinos)", icon: "fa-solid fa-plug-circle-bolt" },
-                { text: "Pasta térmica no soquete DIMM", icon: "fa-solid fa-flask" },
+                { text: "Cabos extras de energia da fonte (6/8 pinos)", icon: "fa-solid fa-plug-circle-bolt" },
+                { text: "Pasta térmica no slot de memória", icon: "fa-solid fa-flask" },
                 { text: "Cabo SATA no cooler", icon: "fa-solid fa-fan" },
                 { text: "Antena no slot M.2", icon: "fa-solid fa-wifi" }
             ],
             correct: 0,
-            explanation: "GPUs potentes exigem conectores extras de energia vindos da fonte. Sem eles, a placa não inicializa a saída de vídeo."
+            explanation: "Placas fortes precisam de cabos extras da fonte. Sem energia extra, não há imagem."
         },
         {
             type: "interactive-component",
             rank: "J", suit: "♠",
             pack: "power",
-            question: "📉 QUEDA DE TENSÃO: Sob carga a linha de 12V cai para 10.5V e o PC reinicia. Qual a causa mais provável?",
+            question: "📉 PC REINICIA EM JOGO: A linha de 12V cai para 10,5V sob carga. Causa mais provável?",
             componentView: "Fonte ATX sob stress: 12V = 10.5V",
             options: [
                 { text: "Fonte subdimensionada ou com falha", icon: "fa-solid fa-bolt" },
@@ -387,37 +387,37 @@ const packQuestions = {
             type: "interactive-component",
             rank: "J", suit: "♠",
             pack: "security",
-            question: "🛡️ PHISHING: E-mail pede senha do banco com link suspeito. Qual a atitude correta?",
+            question: "🛡️ E-MAIL SUSPEITO DO BANCO: Pede senha com um link estranho. O que fazer?",
             componentView: "Caixa de entrada: e-mail suspeito de banco",
             options: [
-                { text: "Não clicar; acessar o banco digitando o site oficial", icon: "fa-solid fa-shield-halved" },
-                { text: "Enviar a senha para 'confirmar conta'", icon: "fa-solid fa-key" },
-                { text: "Baixar o anexo .exe imediatamente", icon: "fa-solid fa-file-arrow-down" },
-                { text: "Desligar o antivírus para ver melhor", icon: "fa-solid fa-shield-virus" }
+                { text: "Não clicar; abrir o banco digitando o site oficial", icon: "fa-solid fa-shield-halved" },
+                { text: "Enviar a senha para confirmar", icon: "fa-solid fa-key" },
+                { text: "Baixar o arquivo .exe", icon: "fa-solid fa-file-arrow-down" },
+                { text: "Desligar o antivírus", icon: "fa-solid fa-shield-virus" }
             ],
             correct: 0,
-            explanation: "Phishing tenta roubar credenciais. Nunca use links de e-mail: abra o site oficial digitando o endereço."
+            explanation: "É golpe (phishing). Não clique no link — digite o endereço do banco você mesmo."
         },
         {
             type: "interactive-component",
             rank: "10", suit: "♥",
             pack: "security",
-            question: "🔐 2FA: O cliente quer proteger o e-mail além da senha. O que recomendar?",
+            question: "🔐 PROTEÇÃO EXTRA DA CONTA: Além da senha, o que recomendar para o e-mail?",
             componentView: "Conta online: autenticação em duas etapas",
             options: [
-                { text: "Ativar autenticação em dois fatores (2FA)", icon: "fa-solid fa-mobile-screen" },
-                { text: "Usar a mesma senha em todos os sites", icon: "fa-solid fa-copy" },
-                { text: "Anotar a senha em post-it no monitor", icon: "fa-solid fa-note-sticky" },
-                { text: "Desativar o firewall do Windows", icon: "fa-solid fa-fire" }
+                { text: "Ativar verificação em duas etapas (2FA)", icon: "fa-solid fa-mobile-screen" },
+                { text: "Usar a mesma senha em tudo", icon: "fa-solid fa-copy" },
+                { text: "Anotar a senha no monitor", icon: "fa-solid fa-note-sticky" },
+                { text: "Desligar o firewall", icon: "fa-solid fa-fire" }
             ],
             correct: 0,
-            explanation: "2FA exige um segundo fator (app ou SMS). Mesmo com a senha vazada, o invasor não entra sem o segundo código."
+            explanation: "A verificação em duas etapas pede um código no celular. Mesmo com a senha, o invasor não entra fácil."
         },
         {
             type: "interactive-component",
             rank: "9", suit: "♣",
             pack: "security",
-            question: "🦠 MALWARE PERSISTENTE: Antivírus remove, mas o vírus volta após reiniciar. Onde costuma se esconder?",
+            question: "🦠 VÍRUS QUE VOLTA: O antivírus remove, mas após reiniciar o vírus volta. Onde ele se esconde?",
             componentView: "Pastas de inicialização + Registro do Windows",
             options: [
                 { text: "Pastas de inicialização e chaves de registro", icon: "fa-solid fa-folder-open" },
@@ -434,7 +434,7 @@ const packQuestions = {
             type: "interactive-component",
             rank: "8", suit: "♠",
             pack: "cooling",
-            question: "❄️ WATER COOLER: O PC liga mas a temperatura sobe rápido e o radiador está frio. O que checar primeiro?",
+            question: "❄️ WATER COOLER: O PC liga, esquenta rápido e o radiador fica frio. O que checar primeiro?",
             componentView: "AIO: bomba + radiador + tubos",
             options: [
                 { text: "Bomba do water cooler (conectada e funcionando)", icon: "fa-solid fa-droplet" },
@@ -449,7 +449,7 @@ const packQuestions = {
             type: "interactive-telemetry",
             rank: "7", suit: "♥",
             pack: "cooling",
-            question: "🌀 CURVA DE FAN: Em idle a CPU fica a 75°C com fans em 30%. Qual ajuste faz sentido?",
+            question: "🌀 CPU QUENTE PARADA: Em repouso a CPU fica a 75°C com fans em 30%. O que ajustar?",
             sensorData: {
                 temp: "CPU 75°C (IDLE ALTO)",
                 rpm: "FAN 30% (BAIXA)",
@@ -468,7 +468,7 @@ const packQuestions = {
             type: "interactive-component",
             rank: "6", suit: "♦",
             pack: "cooling",
-            question: "🧴 PASTA TÉRMICA VELHA: CPU a 90°C em stress com cooler bom e limpo. Qual manutenção clássica?",
+            question: "🧴 CPU A 90°C: Cooler bom e limpo, mas a CPU chega a 90°C. Qual manutenção clássica?",
             componentView: "Dissipador + superfície da CPU",
             options: [
                 { text: "Remover pasta antiga e reaplicar pasta térmica nova", icon: "fa-solid fa-flask-vial" },
@@ -485,7 +485,7 @@ const packQuestions = {
             type: "interactive-component",
             rank: "5", suit: "♣",
             pack: "peripherals",
-            question: "🖨️ IMPRESSORA OFFLINE: Está ligada na rede, mas o Windows mostra 'Offline'. Qual passo inicial?",
+            question: "🖨️ IMPRESSORA OFFLINE: Está ligada, mas o Windows diz Offline. Qual passo inicial?",
             componentView: "Impressora de rede + fila de impressão",
             options: [
                 { text: "Reiniciar spooler e verificar IP/porta da impressora", icon: "fa-solid fa-print" },
@@ -500,7 +500,7 @@ const packQuestions = {
             type: "interactive-component",
             rank: "4", suit: "♠",
             pack: "peripherals",
-            question: "🎧 SEM ÁUDIO: Fones no jack frontal não funcionam, mas os traseiros sim. Onde está o problema?",
+            question: "🎧 FONE DA FRENTE MUDO: O fone na frente não funciona, mas atrás sim. Onde está o problema?",
             componentView: "Painel frontal de áudio (HD Audio) da placa-mãe",
             options: [
                 { text: "Cabo HD Audio do painel frontal desconectado ou invertido", icon: "fa-solid fa-headphones" },
@@ -515,7 +515,7 @@ const packQuestions = {
             type: "interactive-component",
             rank: "3", suit: "♥",
             pack: "peripherals",
-            question: "🖥️ MONITOR SEM SINAL: GPU tem imagem na saída DisplayPort, mas o monitor só tem HDMI. O que usar?",
+            question: "🖥️ MONITOR SEM SINAL: A placa tem DisplayPort e o monitor só HDMI. O que usar?",
             componentView: "GPU DP → Monitor HDMI",
             options: [
                 { text: "Adaptador/cabo DisplayPort para HDMI ativo se necessário", icon: "fa-solid fa-display" },
@@ -533,27 +533,27 @@ const shopCatalog = [
     {
         id: "storage",
         type: "pack",
-        name: "Pacote Armazenamento",
+        name: "Pacote Disco (HD/SSD)",
         icon: "fa-solid fa-hard-drive",
-        desc: "3 novas mãos: SATA, SSD NVMe, SMART e discos.",
+        desc: "3 perguntas novas sobre HD, SSD e cabos de disco.",
         price: 90,
         hands: 3
     },
     {
         id: "network",
         type: "pack",
-        name: "Pacote Rede",
+        name: "Pacote Internet e Rede",
         icon: "fa-solid fa-network-wired",
-        desc: "3 novas mãos: DNS, Wi-Fi, conflito de IP.",
+        desc: "3 perguntas novas sobre Wi-Fi, internet e IP.",
         price: 100,
         hands: 3
     },
     {
         id: "power",
         type: "pack",
-        name: "Pacote Energia",
+        name: "Pacote Fonte e Energia",
         icon: "fa-solid fa-bolt",
-        desc: "3 novas mãos: fonte ATX, jump test e GPU.",
+        desc: "3 perguntas novas sobre fonte de energia e placa de vídeo.",
         price: 95,
         hands: 3
     },
@@ -562,16 +562,16 @@ const shopCatalog = [
         type: "pack",
         name: "Pacote Segurança",
         icon: "fa-solid fa-shield-halved",
-        desc: "3 novas mãos: phishing, 2FA e malware.",
+        desc: "3 perguntas novas sobre golpes, senha e vírus.",
         price: 85,
         hands: 3
     },
     {
         id: "cooling",
         type: "pack",
-        name: "Pacote Refrigeração",
+        name: "Pacote Resfriamento",
         icon: "fa-solid fa-fan",
-        desc: "3 novas mãos: water cooler, curva de fan e pasta térmica.",
+        desc: "3 perguntas novas sobre cooler, ventoinha e pasta térmica.",
         price: 110,
         hands: 3
     },
@@ -580,24 +580,24 @@ const shopCatalog = [
         type: "pack",
         name: "Pacote Periféricos",
         icon: "fa-solid fa-keyboard",
-        desc: "3 novas mãos: impressora, áudio frontal e monitores.",
+        desc: "3 perguntas novas sobre impressora, fone e monitor.",
         price: 80,
         hands: 3
     },
     {
         id: "upgrade_mult",
         type: "upgrade",
-        name: "Mult Inicial +1",
+        name: "Bônus Inicial +1",
         icon: "fa-solid fa-xmark",
-        desc: "Começa cada partida com multiplicador x2.",
+        desc: "Começa cada partida com bônus x2 (ganha mais pontos).",
         price: 150
     },
     {
         id: "upgrade_bonus",
         type: "upgrade",
-        name: "Bônus de Fichas",
+        name: "Pontos extras por acerto",
         icon: "fa-solid fa-coins",
-        desc: "+5 fichas extras em cada acerto.",
+        desc: "+5 pontos a mais toda vez que acertar.",
         price: 120
     },
     {
@@ -605,15 +605,15 @@ const shopCatalog = [
         type: "upgrade",
         name: "Desconto na Loja",
         icon: "fa-solid fa-tags",
-        desc: "Itens da loja de run custam 20% menos.",
+        desc: "Itens da loja durante a partida custam 20% menos.",
         price: 130
     },
     {
         id: "upgrade_extra_hand",
         type: "upgrade",
-        name: "Mão Extra",
+        name: "Pergunta Extra",
         icon: "fa-solid fa-plus",
-        desc: "Cada run tem 11 mãos em vez de 10.",
+        desc: "Cada partida tem 11 perguntas em vez de 10.",
         price: 180
     }
 ];
@@ -622,37 +622,37 @@ const shopCatalog = [
 const runShopCatalog = [
     {
         id: "run_mult_boost",
-        name: "Boost de Mult",
+        name: "Aumentar bônus agora",
         icon: "fa-solid fa-fire",
-        desc: "+1 no multiplicador agora (máx x5).",
+        desc: "+1 no bônus agora (máximo x5).",
         price: 40
     },
     {
         id: "run_chip_boost",
-        name: "Saco de Fichas",
+        name: "Pacote de pontos",
         icon: "fa-solid fa-coins",
-        desc: "+25 fichas instantâneas nesta run.",
+        desc: "+25 pontos na hora, nesta partida.",
         price: 35
     },
     {
         id: "run_hint",
-        name: "Dica Técnica",
+        name: "Dica (mostra a certa)",
         icon: "fa-solid fa-lightbulb",
-        desc: "Revela a carta correta na próxima mão.",
+        desc: "Destaca a resposta correta na próxima pergunta.",
         price: 25
     },
     {
         id: "run_reroll",
-        name: "Embaralhar Mão",
+        name: "Trocar pergunta",
         icon: "fa-solid fa-shuffle",
-        desc: "Troca a pergunta atual por outra do baralho.",
+        desc: "Troca esta pergunta por outra diferente.",
         price: 30
     },
     {
         id: "run_insurance",
-        name: "Seguro de Mult",
+        name: "Seguro do bônus",
         icon: "fa-solid fa-shield",
-        desc: "O próximo erro NÃO reseta o multiplicador.",
+        desc: "Se errar a próxima, o bônus não zera.",
         price: 45
     }
 ];
@@ -718,28 +718,55 @@ function buildPool() {
     return deck;
 }
 
+// Perguntas liberadas pelos pacotes comprados na loja
+function getOwnedPackQuestions() {
+    const list = [];
+    ownedPacks.forEach(pid => {
+        if (packQuestions[pid]) {
+            packQuestions[pid].forEach(q => list.push(cloneQuestion(q, pid)));
+        }
+    });
+    return list;
+}
+
 function getHandsPerRun() {
     return ownedUpgrades.includes('upgrade_extra_hand') ? 11 : 10;
 }
 
 function buildDeck() {
-    const pool = shuffleArray(buildPool());
-    if (pool.length === 0) return [];
     const hands = getHandsPerRun();
+    const base = shuffleArray(baseQuestions.map(q => cloneQuestion(q, "base")));
+    const fromPacks = shuffleArray(getOwnedPackQuestions());
+
+    // 1) Garante as perguntas dos pacotes comprados (assuntos da loja)
     const run = [];
-    let i = 0;
-    while (run.length < hands) {
-        if (i > 0 && i % pool.length === 0) {
-            const reshuffled = shuffleArray(pool.map(q => cloneQuestion(q, q.pack)));
-            for (let k = 0; k < reshuffled.length && run.length < hands; k++) {
-                run.push(reshuffled[k]);
-            }
-            i += pool.length;
-            continue;
-        }
-        run.push(cloneQuestion(pool[i % pool.length], pool[i % pool.length].pack));
-        i++;
+    const usedTexts = new Set();
+
+    fromPacks.forEach(q => {
+        if (run.length >= hands) return;
+        if (usedTexts.has(q.question)) return;
+        run.push(q);
+        usedTexts.add(q.question);
+    });
+
+    // 2) Completa com perguntas base até atingir 10 (ou 11)
+    for (const q of base) {
+        if (run.length >= hands) break;
+        if (usedTexts.has(q.question)) continue;
+        run.push(q);
+        usedTexts.add(q.question);
     }
+
+    // 3) Se ainda faltar (poucas perguntas), repete o pool embaralhado
+    const pool = shuffleArray(buildPool());
+    let guard = 0;
+    while (run.length < hands && pool.length > 0 && guard < 100) {
+        const q = cloneQuestion(pool[guard % pool.length], pool[guard % pool.length].pack);
+        run.push(q);
+        guard++;
+    }
+
+    // Embaralha a ordem final (mantém o conteúdo dos pacotes)
     return shuffleArray(run);
 }
 
@@ -865,6 +892,7 @@ const btnRestart = document.getElementById('btn-restart');
 const btnShop = document.getElementById('btn-shop');
 const btnStartShop = document.getElementById('btn-start-shop');
 const btnShopClose = document.getElementById('btn-shop-close');
+const btnShopMenu = document.getElementById('btn-shop-menu');
 const shopItemsEl = document.getElementById('shop-items');
 const shopMoneyEl = document.getElementById('shop-money');
 const startBankEl = document.getElementById('start-bank');
@@ -896,6 +924,7 @@ btnRestart.addEventListener('click', restartGame);
 if (btnShop) btnShop.addEventListener('click', () => openShop('result'));
 if (btnStartShop) btnStartShop.addEventListener('click', () => openShop('start'));
 if (btnShopClose) btnShopClose.addEventListener('click', closeShop);
+if (btnShopMenu) btnShopMenu.addEventListener('click', goToMenuFromShop);
 
 const btnHomeResult = document.getElementById('btn-home-result');
 if (btnHomeResult) btnHomeResult.addEventListener('click', goHome);
@@ -910,9 +939,13 @@ refreshStartBank();
 
 function refreshStartBank() {
     if (startBankEl) {
-        const unique = baseQuestions.length + ownedPacks.reduce((n, id) => n + (packQuestions[id] ? packQuestions[id].length : 0), 0);
+        const packCount = ownedPacks.reduce((n, id) => n + (packQuestions[id] ? packQuestions[id].length : 0), 0);
+        const unique = baseQuestions.length + packCount;
         const perRun = getHandsPerRun();
-        startBankEl.textContent = `$${bank} no banco · ${perRun} mãos/partida · pool ${unique}`;
+        const packLabel = ownedPacks.length
+            ? ` · ${ownedPacks.length} pacote(s) ativos (+${packCount} perguntas)`
+            : '';
+        startBankEl.textContent = `$${bank} guardados · ${perRun} perguntas/partida · ${unique} no baralho${packLabel}`;
     }
 }
 
@@ -931,6 +964,13 @@ function goHomeFromQuiz() {
 
 function startGame() {
     questions = buildDeck();
+    const packQs = questions.filter(q => q.pack && q.pack !== 'base');
+    if (packQs.length) {
+        console.log('%c📦 Perguntas dos pacotes nesta partida:', 'color:#fbbf24;font-weight:bold',
+            packQs.map(q => `[${q.pack}] ${q.question.substring(0, 50)}...`));
+    } else {
+        console.log('%c📦 Nenhum pacote comprado — só perguntas base.', 'color:#94a3b8');
+    }
     currentQuestionIndex = 0;
     score = 0;
     mult = ownedUpgrades.includes('upgrade_mult') ? 2 : 1;
@@ -1145,6 +1185,14 @@ function selectAnswer(selectedIndex) {
         explanation: q.explanation
     });
 
+    console.log(
+        `%cMão ${currentQuestionIndex + 1}/${questions.length} — ${isCorrect ? "ACERTO" : "ERRO"}`,
+        isCorrect ? "color:#22c55e;font-weight:bold" : "color:#ef4444;font-weight:bold",
+        "\nPergunta:", q.question,
+        "\nSua carta:", q.options[selectedIndex].text,
+        isCorrect ? "" : "\nCerta era:", q.options[q.correct].text
+    );
+
     for (let i = 0; i < optionButtons.length; i++) {
         optionButtons[i].disabled = true;
         if (i !== selectedIndex && i !== q.correct) {
@@ -1176,18 +1224,18 @@ function selectAnswer(selectedIndex) {
     explanationBox.classList.remove('d-none');
     if (isCorrect) {
         explanationBox.classList.add('alert-success');
-        explanationTitle.innerHTML = `<i class="fa-solid fa-circle-check me-2"></i>MÃO VENCEDORA! +${gained} chips`;
+        explanationTitle.innerHTML = `<i class="fa-solid fa-circle-check me-2"></i>ACERTOU! +${gained} pontos`;
     } else {
         explanationBox.classList.add('alert-danger');
-        explanationTitle.innerHTML = `<i class="fa-solid fa-circle-xmark me-2"></i>MÃO PERDIDA`;
+        explanationTitle.innerHTML = `<i class="fa-solid fa-circle-xmark me-2"></i>ERROU — veja a certa`;
     }
     explanationText.textContent = q.explanation;
 
     btnNext.classList.remove('d-none');
     if (currentQuestionIndex === questions.length - 1) {
-        btnNext.innerHTML = 'VER RESULTADO FINAL <i class="fa-solid fa-trophy ms-2"></i>';
+        btnNext.innerHTML = 'VER RESULTADO <i class="fa-solid fa-trophy ms-2"></i>';
     } else {
-        btnNext.innerHTML = 'PRÓXIMA MÃO <i class="fa-solid fa-arrow-right ms-2"></i>';
+        btnNext.innerHTML = 'PRÓXIMA <i class="fa-solid fa-arrow-right ms-2"></i>';
     }
 }
 
@@ -1209,6 +1257,7 @@ function showResults() {
     handsTarget += 10;
     writeSave();
     refreshStartBank();
+    recordRunToHistory();
 
     const correctCount = userAnswers.filter(a => a.isCorrect).length;
     const finalScoreDisplay = document.getElementById('final-score');
@@ -1224,19 +1273,19 @@ function showResults() {
     const thresholdMid = Math.max(2, Math.floor(questions.length * 0.5));
 
     if (correctCount >= thresholdHigh) {
-        resultBadge.textContent = 'ROYAL FLUSH — Especialista N3';
+        resultBadge.textContent = 'Mandou bem — nível avançado';
         resultBadge.style.background = 'linear-gradient(90deg, #059669, #10b981)';
         resultBadge.style.color = '#fff';
         resultIcon.innerHTML = '<i class="fa-solid fa-trophy"></i>';
         resultIcon.style.color = '#e8b923';
     } else if (correctCount >= thresholdMid) {
-        resultBadge.textContent = 'FULL HOUSE — Técnico N2';
+        resultBadge.textContent = 'Foi bem — nível intermediário';
         resultBadge.style.background = 'linear-gradient(90deg, #4c1d95, #7c3aed)';
         resultBadge.style.color = '#fff';
         resultIcon.innerHTML = '<i class="fa-solid fa-medal"></i>';
         resultIcon.style.color = '#a78bfa';
     } else {
-        resultBadge.textContent = 'HIGH CARD — Trainee';
+        resultBadge.textContent = 'Continue praticando — nível iniciante';
         resultBadge.style.background = 'linear-gradient(90deg, #991b1b, #dc2626)';
         resultBadge.style.color = '#fff';
         resultIcon.innerHTML = '<i class="fa-solid fa-book-open"></i>';
@@ -1261,11 +1310,133 @@ function showResults() {
             </div>
             ${!ans.isCorrect ? `<div class="small text-success mb-1"><strong>Carta correta:</strong> ${correctText}</div>` : ''}
             <div class="small opacity-75 mt-1">
-                <strong>Análise:</strong> ${ans.explanation}
+                <strong>Explicação:</strong> ${ans.explanation}
             </div>
         `;
         summaryList.appendChild(item);
     });
+}
+
+
+// ========== HISTÓRICO DO JOGADOR + COMPRAS (visível no F12) ==========
+const HISTORY_KEY = "balatro_tech_history";
+const PURCHASE_KEY = "balatro_tech_purchases";
+
+function loadHistory() {
+    try {
+        return JSON.parse(localStorage.getItem(HISTORY_KEY) || "[]");
+    } catch {
+        return [];
+    }
+}
+
+function saveHistory(list) {
+    localStorage.setItem(HISTORY_KEY, JSON.stringify(list.slice(-50))); // últimas 50 partidas
+}
+
+function loadPurchases() {
+    try {
+        return JSON.parse(localStorage.getItem(PURCHASE_KEY) || "[]");
+    } catch {
+        return [];
+    }
+}
+
+function savePurchases(list) {
+    localStorage.setItem(PURCHASE_KEY, JSON.stringify(list.slice(-100))); // últimas 100 compras
+}
+
+function recordPurchase(name, price, kind, where) {
+    const entry = {
+        date: new Date().toLocaleString("pt-BR"),
+        item: name,
+        price: price,
+        tipo: kind, // 'pacote' | 'upgrade' | 'boost'
+        onde: where // 'loja' | 'loja da partida'
+    };
+    const list = loadPurchases();
+    list.push(entry);
+    savePurchases(list);
+    console.log(
+        "%c🛒 COMPRA REGISTRADA",
+        "color:#3b82f6;font-weight:bold",
+        `$${price} — ${name} (${kind}, ${where})`
+    );
+}
+
+function logPurchaseHistory() {
+    const list = loadPurchases();
+    console.log("%c🛒 HISTÓRICO DE COMPRAS — Balatro Tech", "color:#3b82f6;font-size:14px;font-weight:bold");
+    if (!list.length) {
+        console.log("Nenhuma compra registrada ainda.");
+        return list;
+    }
+    const totalGasto = list.reduce((s, p) => s + (p.price || 0), 0);
+    console.table(list.map((p, i) => ({
+        "#": i + 1,
+        Data: p.date,
+        Item: p.item,
+        Preço: "$" + p.price,
+        Tipo: p.tipo,
+        Onde: p.onde
+    })));
+    console.log(`Total gasto: $${totalGasto} · ${list.length} compra(s)`);
+    console.log("Detalhes:", list);
+    return list;
+}
+
+function logPlayerHistory() {
+    const hist = loadHistory();
+    console.log("%c📜 HISTÓRICO DO JOGADOR — Balatro Tech", "color:#e8b923;font-size:14px;font-weight:bold");
+    if (!hist.length) {
+        console.log("Nenhuma partida registrada ainda.");
+    } else {
+        console.table(hist.map((h, i) => ({
+            "#": i + 1,
+            Data: h.date,
+            Acertos: h.corrects + "/" + h.total,
+            Fichas: h.score,
+            Banco: "$" + h.bankAfter,
+            Meta: h.handsTarget
+        })));
+        console.log("Detalhes das partidas:", hist);
+    }
+    logPurchaseHistory();
+    return hist;
+}
+
+function recordRunToHistory() {
+    const correctCount = userAnswers.filter(a => a.isCorrect).length;
+    const entry = {
+        date: new Date().toLocaleString("pt-BR"),
+        score: score,
+        corrects: correctCount,
+        total: questions.length,
+        bankAfter: bank,
+        handsTarget: handsTarget,
+        answers: userAnswers.map((a, i) => ({
+            mao: i + 1,
+            pergunta: a.question.substring(0, 80),
+            acertou: a.isCorrect,
+            explicacao: a.explanation.substring(0, 100)
+        }))
+    };
+    const hist = loadHistory();
+    hist.push(entry);
+    saveHistory(hist);
+    console.log("%c✅ Partida salva no histórico", "color:#22c55e;font-weight:bold");
+    console.log("Resumo desta partida:", entry);
+    logPlayerHistory();
+}
+
+function goToMenuFromShop() {
+    midShopOpen = false;
+    screenShop.classList.add("d-none");
+    screenResult.classList.add("d-none");
+    screenQuiz.classList.add("d-none");
+    screenStart.classList.remove("d-none");
+    refreshStartBank();
+    logPlayerHistory();
 }
 
 function openShop(from) {
@@ -1275,13 +1446,13 @@ function openShop(from) {
     screenResult.classList.add('d-none');
     screenQuiz.classList.add('d-none');
     screenShop.classList.remove('d-none');
-    document.getElementById('shop-mode-label').textContent = 'LOJA TECH';
-    document.getElementById('shop-desc-text').textContent = 'Compre pacotes de cartas para desbloquear novas mãos no próximo run!';
+    document.getElementById('shop-mode-label').textContent = 'LOJA';
+    document.getElementById('shop-desc-text').textContent = 'Gaste o dinheiro para liberar mais perguntas e melhorias.';
     const closeBtn = document.getElementById('btn-shop-close');
     if (closeBtn) {
         closeBtn.innerHTML = shopReturnScreen === 'result'
             ? '<i class="fa-solid fa-arrow-left me-2"></i> VOLTAR'
-            : '<i class="fa-solid fa-play me-2"></i> JOGAR COM O BARALHO';
+            : '<i class="fa-solid fa-play me-2"></i> JOGAR';
     }
     renderShop(false);
 }
@@ -1291,13 +1462,13 @@ function openMidShop(auto) {
     shopReturnScreen = 'quiz';
     screenQuiz.classList.add('d-none');
     screenShop.classList.remove('d-none');
-    document.getElementById('shop-mode-label').textContent = 'LOJA DA RUN';
+    document.getElementById('shop-mode-label').textContent = 'LOJA (desta partida)';
     document.getElementById('shop-desc-text').textContent = auto
-        ? 'Entre as mãos: compre boosts temporários ou pacotes permanentes com o dinheiro da run!'
-        : 'Compre boosts para esta partida ou pacotes permanentes. O dinheiro da run ainda não está no banco.';
+        ? 'Compre melhorias rápidas ou pacotes novos com o dinheiro que você tem agora.'
+        : 'Compre melhorias desta partida ou pacotes permanentes. O dinheiro desta partida ainda não foi guardado.';
     const closeBtn = document.getElementById('btn-shop-close');
     if (closeBtn) {
-        closeBtn.innerHTML = '<i class="fa-solid fa-play me-2"></i> CONTINUAR PARTIDA';
+        closeBtn.innerHTML = '<i class="fa-solid fa-play me-2"></i> CONTINUAR';
     }
     renderShop(true);
 }
@@ -1362,7 +1533,7 @@ function renderShop(isMidRun) {
         // Seção de boosts de run
         const section = document.createElement('div');
         section.className = 'shop-section-title';
-        section.innerHTML = '<i class="fa-solid fa-bolt me-1"></i> Boosts desta partida';
+        section.innerHTML = '<i class="fa-solid fa-bolt me-1"></i> Melhorias só desta partida';
         shopItemsEl.appendChild(section);
 
         runShopCatalog.forEach(item => {
@@ -1376,7 +1547,7 @@ function renderShop(isMidRun) {
                     <div class="shop-item-price">$${price}</div>
                 </div>
                 <div class="shop-item-desc">${item.desc}</div>
-                <div class="shop-item-meta">Só vale nesta run</div>
+                <div class="shop-item-meta">Só vale nesta partida</div>
                 <button class="btn-buy" data-run="${item.id}" ${!canBuy ? 'disabled' : ''}>
                     ${canBuy ? 'Comprar' : 'Sem dinheiro'}
                 </button>
@@ -1390,7 +1561,7 @@ function renderShop(isMidRun) {
 
         const section2 = document.createElement('div');
         section2.className = 'shop-section-title';
-        section2.innerHTML = '<i class="fa-solid fa-layer-group me-1"></i> Pacotes permanentes';
+        section2.innerHTML = '<i class="fa-solid fa-layer-group me-1"></i> Pacotes (ficam para sempre)';
         shopItemsEl.appendChild(section2);
     }
 
@@ -1410,7 +1581,7 @@ function renderShop(isMidRun) {
                 <div class="shop-item-price">${owned ? 'COMPRADO' : '$' + price}</div>
             </div>
             <div class="shop-item-desc">${item.desc}</div>
-            ${isPack ? `<div class="shop-item-meta">+${item.hands} mãos no baralho</div>` : `<div class="shop-item-meta">Upgrade permanente</div>`}
+            ${isPack ? `<div class="shop-item-meta">+${item.hands} perguntas novas</div>` : `<div class="shop-item-meta">Melhoria permanente</div>`}
             <button class="btn-buy" data-id="${item.id}" ${owned || !canBuy ? 'disabled' : ''}>
                 ${owned ? 'Já possui' : (canBuy ? 'Comprar' : 'Sem dinheiro')}
             </button>
@@ -1425,7 +1596,10 @@ function renderShop(isMidRun) {
 
 function buyRunItem(id, price) {
     if (getAvailableMoney() < price) return;
+    const runItem = runShopCatalog.find(i => i.id === id);
+    const itemName = runItem ? runItem.name : id;
     spendMoney(price);
+    recordPurchase(itemName, price, 'boost', 'loja da partida');
 
     if (id === 'run_mult_boost') {
         mult = Math.min(mult + 1, 5);
@@ -1473,6 +1647,12 @@ function buyItem(id, priceOverride) {
     }
 
     spendMoney(price);
+    recordPurchase(
+        item.name,
+        price,
+        item.type === 'pack' ? 'pacote' : 'upgrade',
+        midShopOpen ? 'loja da partida' : 'loja'
+    );
     renderShop(midShopOpen);
     refreshStartBank();
     playCardSound();
@@ -1481,3 +1661,7 @@ function buyItem(id, priceOverride) {
 function restartGame() {
     startGame();
 }
+
+// Ao abrir o site, mostra o histórico no F12 (Console)
+console.log("%cBalatro Tech carregado. Digite logPlayerHistory() ou logPurchaseHistory() no Console.", "color:#93c5fd");
+logPlayerHistory();
